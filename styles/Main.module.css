@@ -1,0 +1,139 @@
+.main {
+  background: #232323;
+  background-size: 300%;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 1px;
+}
+
+.main-se {
+  width: auto;
+  text-align: center;
+  height: auto;
+}
+
+.qlimg {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+	cursor: pointer;
+}
+
+.qlimg:hover {
+  box-shadow: 0 0 20px #ffffff3b;
+  background-color: #5e5b5b3b;
+}
+
+.main-se .img {
+  width: 160px;
+  height: 190px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.main-box {
+  width: max-content;
+  border-radius: 100px;
+  background: black;
+  height: 30px;
+  position: relative;
+  display: flex;
+  margin: auto;
+  align-items: center;
+  padding: 14px 18px 10px 18px;
+  gap: 10px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(155, 150, 150, 0.25);
+  max-width: 304px;
+}
+
+.main-box a {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#context-menu{
+    position: fixed;
+    z-index: 999999;
+    width: 200px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top left;
+    box-shadow: 0px 5px 15px 0px rgb(0, 0, 0, .24);
+}
+
+#context-menu.active{
+    transform: scale(1);
+    animation:pop .3s cubic-bezier(0,1,.5,1.08);
+}
+
+@keyframes pop{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+#context-menu .item{
+    padding: 10px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+#context-menu .item::selection{
+    background: none;
+}
+
+#context-menu .item:hover{
+    background: #f2f2f2;
+}
+
+#context-menu .item:nth-child(1){
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#context-menu .item:nth-last-child(1){
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#context-menu .item:active{
+    background: #dddddd;
+}
+
+#context-menu .item i{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.arrow-right .uil-angle-right{
+    float: right;
+}
+
+.divider{
+  margin: 2px 0px;
+  border-bottom: 1px solid #ccc;
+}
+
+.bottom-left-menu {
+	position: absolute;
+	left: 8.33%;
+	right: 8.33%;
+	top: 8.33%;
+	bottom: 8.33%;
+	
+	background: #FFFFFF;
+}

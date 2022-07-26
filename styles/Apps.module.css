@@ -1,0 +1,138 @@
+.main {
+  background: var(--bg-color);
+	background-size: 300%;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.main h1 {
+	color: var(--font-color);
+	padding: 12px;
+	white-space: nowrap;
+}
+
+.main h1 mark {
+	background-color: var(--ui);
+	color: var(--clock-hover);
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+}
+
+.main h1 a {
+	cursor: pointer;
+}
+
+.main hr {
+	background: var(--ui);
+	color: var(--ui);
+	border: none;
+	height: 5px;
+	border-radius: 2px;
+	width: 98%;
+}
+
+.apps {
+	display: flex;
+}
+
+.app {
+	flex-wrap: wrap;
+	padding: 20px;
+	text-align: center;
+  -webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+.app:hover {
+  -webkit-transform: scale(1.1) rotate(0.02deg);
+	transform: scale(1.1);
+}
+
+.app img, .app h2{
+	cursor: pointer;
+}
+
+.app h2 {
+	font-size: 12px;
+	font-weight: bolder;
+	color: var(--font-color);
+}
+
+.separator {
+  height: 20px;
+  width: 1px;
+  background: grey;
+  margin: 5px 10px;
+}
+
+#context-menu{
+    position: fixed;
+    z-index: 999999;
+    width: 200px;
+    background: #fff;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top left;
+    box-shadow: 0px 5px 15px 0px rgb(0, 0, 0, .24);
+}
+
+#context-menu.active{
+    transform: scale(1);
+    animation:pop .3s cubic-bezier(0,1,.5,1.08);
+}
+
+@keyframes pop{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+#context-menu .item{
+    padding: 10px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+#context-menu .item::selection{
+    background: none;
+}
+
+#context-menu .item:hover{
+    background: #f2f2f2;
+}
+
+#context-menu .item:nth-child(1){
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#context-menu .item:nth-last-child(1){
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#context-menu .item:active{
+    background: #dddddd;
+}
+
+#context-menu .item i{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.arrow-right .uil-angle-right{
+    float: right;
+}
+
+.divider {
+  margin: 2px 0px;
+  border-bottom: 1px solid #ccc;
+}

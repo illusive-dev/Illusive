@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_error": "pages/_error.js",
+  "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/api/apps": "pages/api/apps.js",
+  "/home": "pages/home.js",
+  "/settings": "pages/settings.js",
+  "/route": "pages/route.js",
+  "/service/uv/[url]": "pages/service/uv/[url].js",
+  "/api/malware": "pages/api/malware.js"
+}

@@ -1,0 +1,36 @@
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/api/apps";
+exports.ids = ["pages/api/apps"];
+exports.modules = {
+
+/***/ "(api)/./pages/api/apps.ts":
+/*!***************************!*\
+  !*** ./pages/api/apps.ts ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"applications\": () => (/* binding */ applications),\n/* harmony export */   \"default\": () => (/* binding */ handler)\n/* harmony export */ });\nconst applications = [\n    {\n        name: \"Settings\",\n        type: \"app\",\n        url: \"/settings\",\n        col: false,\n        image: \"/img/home/gear.png\",\n        size: 25\n    },\n    {\n        name: \"Collection\",\n        type: \"app\",\n        url: \"/collection\",\n        col: false,\n        filter: `invert(1)`,\n        image: \"/collection.png\",\n        size: 25\n    },\n    {\n        name: \"Home\",\n        type: \"app\",\n        url: \"/home\",\n        col: false,\n        image: \"/img/home/home.svg\",\n        filter: \"invert(1)\"\n    },\n    {\n        type: \"sep\",\n        col: false\n    },\n    {\n        name: \"Roblox\",\n        type: \"app\",\n        url: \"https://roblox.com\",\n        action: \"proxy\",\n        image: \"/unnamed.jpg\"\n    },\n    {\n        name: \"Now.gg\",\n        type: \"app\",\n        url: \"https://roblox.com\",\n        action: \"proxy\",\n        image: \"/app-store.png\"\n    },\n    {\n        name: \"New Folder\",\n        type: \"folder\",\n        id: \"new\",\n        image: \"/folder.png\",\n        contents: [\n            {\n                name: \"Roblox\",\n                type: \"app\",\n                url: \"https://roblox.com\",\n                action: \"proxy\",\n                image: \"/unnamed.jpg\"\n            }, \n        ]\n    }, \n];\n\nfunction handler(req, res) {\n    res.status(200).json(applications);\n//res.status(200).json([{name:'GeForce Now',url:'https://play.geforcenow.com/mall/',id:1},],)\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwaSkvLi9wYWdlcy9hcGkvYXBwcy50cy5qcyIsIm1hcHBpbmdzIjoiOzs7OztBQU1BLE1BQU1BLFlBQVksR0FBRztJQUNwQjtRQUNDQyxJQUFJLEVBQUUsVUFBVTtRQUNoQkMsSUFBSSxFQUFFLEtBQUs7UUFDWEMsR0FBRyxFQUFFLFdBQVc7UUFDZEMsR0FBRyxFQUFFLEtBQUs7UUFDWkMsS0FBSyxFQUFFLG9CQUFvQjtRQUN6QkMsSUFBSSxFQUFFLEVBQUU7S0FDVjtJQUNEO1FBQ0NMLElBQUksRUFBRSxZQUFZO1FBQ2xCQyxJQUFJLEVBQUUsS0FBSztRQUNYQyxHQUFHLEVBQUUsYUFBYTtRQUNoQkMsR0FBRyxFQUFFLEtBQUs7UUFDWkcsTUFBTSxFQUFFLENBQUMsU0FBUyxDQUFDO1FBQ25CRixLQUFLLEVBQUUsaUJBQWlCO1FBQ3RCQyxJQUFJLEVBQUUsRUFBRTtLQUNWO0lBQ0Q7UUFDQ0wsSUFBSSxFQUFFLE1BQU07UUFDWkMsSUFBSSxFQUFFLEtBQUs7UUFDWEMsR0FBRyxFQUFFLE9BQU87UUFDVkMsR0FBRyxFQUFFLEtBQUs7UUFDWkMsS0FBSyxFQUFFLG9CQUFvQjtRQUN6QkUsTUFBTSxFQUFFLFdBQVc7S0FDckI7SUFDRDtRQUNDTCxJQUFJLEVBQUUsS0FBSztRQUNURSxHQUFHLEVBQUUsS0FBSztLQUNaO0lBQ0Q7UUFDQ0gsSUFBSSxFQUFFLFFBQVE7UUFDZEMsSUFBSSxFQUFFLEtBQUs7UUFDWEMsR0FBRyxFQUFFLG9CQUFvQjtRQUN2QkssTUFBTSxFQUFFLE9BQU87UUFDakJILEtBQUssRUFBRSxjQUFjO0tBQ3JCO0lBQ0Q7UUFDQ0osSUFBSSxFQUFFLFFBQVE7UUFDZEMsSUFBSSxFQUFFLEtBQUs7UUFDWEMsR0FBRyxFQUFFLG9CQUFvQjtRQUN2QkssTUFBTSxFQUFFLE9BQU87UUFDakJILEtBQUssRUFBRSxnQkFBZ0I7S0FDdkI7SUFDRDtRQUNDSixJQUFJLEVBQUUsWUFBWTtRQUNsQkMsSUFBSSxFQUFFLFFBQVE7UUFDZE8sRUFBRSxFQUFFLEtBQUs7UUFDVEosS0FBSyxFQUFFLGFBQWE7UUFDcEJLLFFBQVEsRUFBRTtZQUNUO2dCQUNDVCxJQUFJLEVBQUUsUUFBUTtnQkFDZEMsSUFBSSxFQUFFLEtBQUs7Z0JBQ1hDLEdBQUcsRUFBRSxvQkFBb0I7Z0JBQ3ZCSyxNQUFNLEVBQUUsT0FBTztnQkFDakJILEtBQUssRUFBRSxjQUFjO2FBQ3JCO1NBQ0Q7S0FDRDtDQUNEO0FBSUM7QUFFYSxTQUFTTSxPQUFPLENBQzdCQyxHQUFtQixFQUNuQkMsR0FBMEIsRUFDMUI7SUFDQUEsR0FBRyxDQUFDQyxNQUFNLENBQUMsR0FBRyxDQUFDLENBQUNDLElBQUksQ0FBQ2YsWUFBWSxDQUFDLENBQUM7QUFDbkMsNkZBQTZGO0NBQzlGIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vbXktYXBwLy4vcGFnZXMvYXBpL2FwcHMudHM/MTAyZiJdLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgdHlwZSB7IE5leHRBcGlSZXF1ZXN0LCBOZXh0QXBpUmVzcG9uc2UgfSBmcm9tICduZXh0J1xuXG50eXBlIERhdGEgPSB7XG4gIG5hbWU6IHN0cmluZ1xufVxuXG5jb25zdCBhcHBsaWNhdGlvbnMgPSBbXG5cdHtcblx0XHRuYW1lOiBcIlNldHRpbmdzXCIsXG5cdFx0dHlwZTogXCJhcHBcIixcblx0XHR1cmw6IFwiL3NldHRpbmdzXCIsXG4gICAgY29sOiBmYWxzZSxcblx0XHRpbWFnZTogXCIvaW1nL2hvbWUvZ2Vhci5wbmdcIixcbiAgICBzaXplOiAyNSxcblx0fSxcblx0e1xuXHRcdG5hbWU6IFwiQ29sbGVjdGlvblwiLFxuXHRcdHR5cGU6IFwiYXBwXCIsXG5cdFx0dXJsOiBcIi9jb2xsZWN0aW9uXCIsXG4gICAgY29sOiBmYWxzZSxcblx0XHRmaWx0ZXI6IGBpbnZlcnQoMSlgLFxuXHRcdGltYWdlOiBcIi9jb2xsZWN0aW9uLnBuZ1wiLFxuICAgIHNpemU6IDI1LFxuXHR9LFxuXHR7XG5cdFx0bmFtZTogXCJIb21lXCIsXG5cdFx0dHlwZTogXCJhcHBcIixcblx0XHR1cmw6IFwiL2hvbWVcIixcbiAgICBjb2w6IGZhbHNlLFxuXHRcdGltYWdlOiBcIi9pbWcvaG9tZS9ob21lLnN2Z1wiLFxuICAgIGZpbHRlcjogJ2ludmVydCgxKSdcblx0fSxcblx0e1xuXHRcdHR5cGU6IFwic2VwXCIsXG4gICAgY29sOiBmYWxzZSxcblx0fSwgXG5cdHtcblx0XHRuYW1lOiBcIlJvYmxveFwiLFxuXHRcdHR5cGU6IFwiYXBwXCIsXG5cdFx0dXJsOiBcImh0dHBzOi8vcm9ibG94LmNvbVwiLFxuICAgIGFjdGlvbjogXCJwcm94eVwiLFxuXHRcdGltYWdlOiBcIi91bm5hbWVkLmpwZ1wiXG5cdH0sXG5cdHtcblx0XHRuYW1lOiBcIk5vdy5nZ1wiLFxuXHRcdHR5cGU6IFwiYXBwXCIsXG5cdFx0dXJsOiBcImh0dHBzOi8vcm9ibG94LmNvbVwiLFxuICAgIGFjdGlvbjogXCJwcm94eVwiLFxuXHRcdGltYWdlOiBcIi9hcHAtc3RvcmUucG5nXCJcblx0fSxcblx0e1xuXHRcdG5hbWU6IFwiTmV3IEZvbGRlclwiLFxuXHRcdHR5cGU6IFwiZm9sZGVyXCIsXG5cdFx0aWQ6IFwibmV3XCIsXG5cdFx0aW1hZ2U6IFwiL2ZvbGRlci5wbmdcIixcblx0XHRjb250ZW50czogW1xuXHRcdFx0e1xuXHRcdFx0XHRuYW1lOiBcIlJvYmxveFwiLFxuXHRcdFx0XHR0eXBlOiBcImFwcFwiLFxuXHRcdFx0XHR1cmw6IFwiaHR0cHM6Ly9yb2Jsb3guY29tXCIsXG5cdFx0ICAgIGFjdGlvbjogXCJwcm94eVwiLFxuXHRcdFx0XHRpbWFnZTogXCIvdW5uYW1lZC5qcGdcIlxuXHRcdFx0fSxcblx0XHRdXG5cdH0sXG5dXG5cbmV4cG9ydCB7XG5cdGFwcGxpY2F0aW9uc1xufTtcblxuZXhwb3J0IGRlZmF1bHQgZnVuY3Rpb24gaGFuZGxlcihcbiAgcmVxOiBOZXh0QXBpUmVxdWVzdCxcbiAgcmVzOiBOZXh0QXBpUmVzcG9uc2U8RGF0YT5cbikge1xuICByZXMuc3RhdHVzKDIwMCkuanNvbihhcHBsaWNhdGlvbnMpO1xuICAvL3Jlcy5zdGF0dXMoMjAwKS5qc29uKFt7bmFtZTonR2VGb3JjZSBOb3cnLHVybDonaHR0cHM6Ly9wbGF5LmdlZm9yY2Vub3cuY29tL21hbGwvJyxpZDoxfSxdLClcbn1cbiJdLCJuYW1lcyI6WyJhcHBsaWNhdGlvbnMiLCJuYW1lIiwidHlwZSIsInVybCIsImNvbCIsImltYWdlIiwic2l6ZSIsImZpbHRlciIsImFjdGlvbiIsImlkIiwiY29udGVudHMiLCJoYW5kbGVyIiwicmVxIiwicmVzIiwic3RhdHVzIiwianNvbiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(api)/./pages/api/apps.ts\n");
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../../webpack-api-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/apps.ts"));
+module.exports = __webpack_exports__;
+
+})();

@@ -1,0 +1,484 @@
+@keyframes ani {
+  from {
+    transform: rotateX(140deg) scale(32);
+  }
+  to {
+    transform: none;
+  }
+}
+
+
+.main {
+  background: var(--bg-color);
+  background-size: 300%;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  letter-spacing: 0;
+  font-weight: lighter;
+
+  --apps-up-height: 91px;
+  --apps-down-height: 21px;
+  --bottom-height: 18px;
+}
+
+.flex-vis {
+  display: flex !important;
+}
+
+.main * {
+  font-family: Roboto, sans-serif;
+}
+
+.main input::placeholder {
+  color: #fff;
+  opacity: 0.8;
+}
+
+.apps-frame {
+  height: calc(100% - var(--bottom-height));
+  padding: 7px;
+}
+
+.main-frame iframe {
+  border-radius: 5px;
+  height: 100%;
+  pointer-events: auto;
+  width: 100%;
+  outline: 0;
+  border: 0;
+}
+
+.main-frame {
+  transition: height 0.4s;
+}
+
+.main-frame.apps-down {
+  height: calc(calc(100% - var(--bottom-height)) - var(--apps-down-height));
+}
+
+.apps-dropdown {
+  height: 20px;
+  cursor: pointer;
+  width: 25px;
+  padding: 5px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(0,0,0,0.4);
+  opacity: 0.4;
+  border-radius: 0 0 6px 6px;
+  transition: 0.2s ease;
+}
+
+.apps-dropdown:hover {
+  opacity: 1;
+}
+
+.apps-dropdown:active {
+  background: rgb(0,0,0,0.6);
+}
+
+.apps-dropdown.apps-up {
+  transform: translateX(-50%) translateY(-30px);
+  background: #232323;
+  opacity: 1;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.apps-dropdown.apps-up svg {
+  transform: rotate(180deg)
+}
+
+.apps-dropdown svg {
+  color: var(--font-color);
+  width: 25px;
+  height: 20px;
+  transition: ease-in-out 250ms;
+}
+
+.main-frame.apps-up {
+  height: calc(calc(100% - var(--bottom-height)) - var(--apps-up-height));
+}
+
+.user-form {
+  height: 40px;
+  width: 40%;
+  min-width: 400px;
+  border-radius: 6px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #232323;
+  bottom: 4.6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: inset 0px 4px 4px rgba(55, 55, 55, 0.25);
+}
+
+.user-form form {
+  width: max-content;
+  position: absolute;
+  width: calc(100% - 46px);
+  display: block;
+  left: 40px;
+  max-width: 615px;
+}
+.form-submit-main {
+  width: calc(100% - 130px);
+  border-radius: 5px;
+  border: none;
+  display: inline-block;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.32);
+  color: var(--font-color);
+  padding: 3px;
+  background: #171717;
+  text-align: center;
+  margin-left: 5px;
+  max-height: 24px;
+  overflow: hidden;
+  height: 16px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-size: 13px;
+  letter-spacing: 0.6px !important;
+  padding-left: 7px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.form-submit-main:focus {
+  outline: none;
+  text-align: left;
+  justify-content: left;
+}
+
+.form-submit-main::before {
+  content: 'Search or enter web address';
+}
+
+.form-submit-main:focus:not([val])::before {
+  content: '‎ ' !important;
+}
+
+.form-submit-main[val]::before {
+  content: '';
+}
+
+.user-form input {
+	
+}
+
+.user-form input::placeholder {
+  color: var(--font-color);
+  font-size: 13px;
+}
+
+.clock {
+  transition: ease-in-out 200ms;
+  width: auto;
+  min-width: 50px;
+  margin-left: 5px;
+  vertical-align: middle;
+  color: var(--font-color);
+  font-weight: lighter;
+  display: inline-block;
+  letter-spacing: 0px;
+  font-size: 13px;
+  margin-right: 8px;
+}
+
+.clock:hover {
+  color: var(--clock-hover);
+  cursor: pointer;
+}
+
+.icon-ico {
+  width: 20px;
+  margin-left: 4px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.apps {
+  display: none;
+	flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 10px;
+  overflow: hidden;
+  height: 60px;
+  animation: an 0.4s;
+	margin: auto auto;
+  background: transparent;
+}
+
+@keyframes an {
+  from {
+    height: 0px;
+    padding: 0;
+  } to {
+    padding-top: 10px;
+    height: 60px;
+  }
+}
+
+@keyframes cl {
+  from {
+    height: 60px;
+  } to {
+    padding: 0;
+    height: 0px;
+  }
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 3px;
+}
+
+.app, .app img {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+#dropdown {
+	display: none;
+}
+
+.marking {
+  color: #8F8F8F;
+  caret-color: white;
+}
+
+.bottom-container {
+	display: flex;
+	align-items: center;
+	height: max-content;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	justify-content: space-between;
+}
+
+.bottom-left-menu {
+  height: 40px;
+  width: max-width;
+  position: absolute;
+  left: 4.6px;
+  bottom: 4.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+}
+
+/*.bottom-left-menu *:hover, .bottom-right-menu *:hover {
+	box-shadow: 0 0 20px #ffffff3b;
+}*/
+
+.bottom-right-menu {
+	height: 40px;
+  width: max-width;
+  position: absolute;
+  right: 0;
+  bottom: 4.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 6px;
+  gap: 5px;
+}
+
+.separator {
+  height: 20px;
+  width: 1px;
+  background: grey;
+  margin: 5px 10px;
+}
+
+#context-menu{
+    position: fixed;
+    z-index: 999999;
+    width: 200px;
+    background-color: var(--ui);
+		opacity: 0.85;
+    border-radius: 5px;
+    transform: scale(0);
+    transform-origin: top left;
+    box-shadow: 0px 5px 15px 0px rgb(0, 0, 0, .24);
+}
+
+#context-menu.active{
+    transform: scale(1);
+    animation:pop .3s cubic-bezier(0,1,.5,1.08);
+}
+
+@keyframes pop{
+    0%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+#context-menu .item{
+  padding: 10px 10px;
+  font-size: 15px;
+	cursor: pointer;
+}
+
+
+#context-menu .item::selection{
+	background-color: var(--ui);
+}
+
+#context-menu .item:hover{
+  background-color: black;
+}
+
+#context-menu .item:nth-child(1){
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#context-menu .item:nth-last-child(1){
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#context-menu .item:active{
+    background: red;
+}
+
+#context-menu .item i{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.arrow-right .uil-angle-right{
+    float: right;
+}
+
+.divider{
+  margin: 2px 0px;
+  border-bottom: 1px solid red;
+}
+
+.main-nav-icon {
+	border: none;
+	border-radius: 10%;
+	cursor: pointer;
+}
+
+.main-nav-icon path {
+	stroke-width: 53px;
+}
+
+.historyTab {
+	z-index: 9999;
+	position: absolute;
+	right: -20%;
+	background-color: #000000;
+	width: 20%;
+	height: 100%;
+	opacity: 0.84;
+	border: none;
+  transition: right ease-in-out 280ms;
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+}
+
+.historyTab h1 {
+  color: white;
+  margin: 20px;
+  font-weight: lighter;
+  letter-spacing: 0;
+}
+
+.historyTab[id="noactive"] {
+	right: -20%;
+}
+
+.historyTab[id="active"] {
+	right: 0px;
+	animation-name: tabsslidein;
+}
+
+.historyapps {
+	color: white;
+	display: flex none;
+	flex-wrap: wrap;
+}
+
+.historyapp {
+	position: relative;
+  right: 135%;
+  bottom: -10%;
+  width: 550%;
+  height: 10%;
+  background: #adadad;
+  border: none;
+  border-radius: 10%;
+  cursor: pointer;
+  text-align:center;
+  -webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+.historyapp:hover {
+  -webkit-transform: scale(1.1) rotate(0.01deg);
+	transform: scale(1.1);
+}
+
+.historyapptext p {
+	position: absolute;
+	font-size: 12px;
+	bottom: calc(50% - 50px);
+	right: 30%;
+	z-index: 99999999;
+	color: rgba(0, 0, 0, 0.65);
+}
+
+.historyapp img {
+  margin-left: 5%;
+  margin-top: 15%;
+	cursor: pointer;
+}
+
+.reload-btn {
+  background: transparent !important;
+  color: white;
+  font-weight: bolder;
+}
+
+.star-btn {
+  background: transparent !important;
+  color: white;
+  font-weight: bolder;
+  margin-bottom: 2px;
+}
+
+.open-tabs {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+  color: white;
+  margin-left: 5px;
+}
+
+.open-tabs:hover {
+  fill: #1a66ff;
+}

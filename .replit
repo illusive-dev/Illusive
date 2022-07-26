@@ -1,0 +1,2 @@
+run = "bash start.sh"
+language = "nodejs"

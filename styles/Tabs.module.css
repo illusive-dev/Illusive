@@ -1,0 +1,127 @@
+.main {
+  background: var(--bg-color);
+	background-size: 300%;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.main h1 {
+	color: white;
+	padding: 12px;
+}
+
+.main h1 mark {
+	background: var(--bg-color);
+	color: white;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+}
+
+.main hr {
+	background: #3C3C3C;
+	color: #3C3C3C;
+	border: none;
+	height: 5px;
+	border-radius: 2px;
+	width: 98%;
+}
+
+.items {
+	width: 10%;
+	margin: 10px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.settitem {
+	padding: 10px;
+	text-align: right;
+	float: right;
+	white-space: nowrap;
+}
+
+.settitem h2 {
+	font-size: 16px;
+	font-weight: bolder;
+	color: #C7C7C7;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+.settitem h2:hover, #setbox:hover {
+	-webkit-transform: scale(1.1) rotate(0.01deg);
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
+#setbox {
+	display: block;
+	margin-right: 15px;
+	background-color: #D9D9D9;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 10%;
+	float:left;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+.settingsShow {
+	color: white;
+}
+
+.settingsShow h2 {
+	font-size: 40px;
+	position: absolute;
+	left: 35%;
+	top: 12%;
+}
+
+.settingContainers {
+  display: flex none;
+  flex-wrap: wrap;
+  width: 70%;
+
+  position: relative;
+}
+
+.settingContainer {
+  position: absolute;
+	left: 50%;
+	top: 12%;
+
+  width: 350px;
+  height: 150px;
+
+  border: none;
+  border-radius: 10px;
+}
+
+#settingTheme {
+  margin: auto;
+}
+
+#settingTheme ul {
+  width: 10%;
+}
+
+#settingTheme ul li {
+  padding: 10px;
+  cursor: pointer;
+
+  color: white;
+
+  -webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+}
+
+#settingTheme ul li:hover {
+  color: #949494;
+  -webkit-transform: scale(1.2) rotate(0.01deg);
+	transform: scale(1.2);
+}

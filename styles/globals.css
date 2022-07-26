@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: Inter, 'sans-serif';
+  letter-spacing: 0 !important;
+  font-weight: lighter;
+  overflow: hidden;
+}
+
+[data-theme="classic"] {
+	--bg-color: #181818 /* black, #181818 */;
+	--font-color: #a6a6a6 /* green,  */;
+	--ui: #808080 ;
+  --clock-hover: #ebebeb;
+  --qlimg-hover-background: #5e5b5b3b;
+  --qlimg-hover-shadow: #ffffff3b;
+}
+
+[data-theme="hacker"] {
+	--bg-color: #000000 /* black, #181818 */;
+	--font-color: #37ff00 /* green,  */;
+	--ui: #1f1f1f ;
+  --clock-hover: #197500;
+  --qlimg-hover-background: #37ff00;
+  --qlimg-hover-shadow: #37ff00;
+}
