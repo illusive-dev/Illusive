@@ -14,6 +14,15 @@ const applications = [
     size: 25,
 	},
 	{
+		name: "History",
+		type: "app",
+		url: "/history",
+    col: false,
+		image: "/img/home/history.png",
+    size: 25,
+    filter: 'invert(0) brightness(10000000000000)',
+	},
+	{
 		name: "Collection",
 		type: "app",
 		url: "/collection",
@@ -39,15 +48,43 @@ const applications = [
 		type: "app",
 		url: "https://roblox.com",
     action: "proxy",
-		image: "/unnamed.jpg"
+		image: "/img/apps/roblox.png"
 	},
 	{
 		name: "Now.gg",
 		type: "app",
-		url: "https://roblox.com",
+		url: "https://now.gg",
     action: "proxy",
-		image: "/app-store.png"
+		image: "/img/apps/now.png"
 	},
+  {
+    name: "Discord",
+    type: "app",
+    url: "https://discord.com",
+    action: "proxy",
+    image: "/img/apps/discord.png"
+  },
+  {
+    name: "Youtube",
+    type: "app",
+    url: "https://youtube.com",
+    action: "proxy",
+    image: "/img/apps/youtube.png"
+  },
+  {
+    name: "Spotify",
+    type: "app",
+    url: "https://open.spotify.com",
+    action: "proxy",
+    image: "/img/apps/spotify.png"
+  },
+  {
+    name: "GeForce Now",
+    type: "app",
+    url: "https://play.geforcenow.com/mall/",
+    action: "proxy",
+    image: '/img/apps/gfn.png'
+  },
 	{
 		name: "New Folder",
 		type: "folder",

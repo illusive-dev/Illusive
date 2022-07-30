@@ -9,24 +9,36 @@ import { loadFull } from "tsparticles";
 import Script from 'next/script';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import cookieCutter from 'cookie-cutter';
 
 const Route: NextPage = ( { config } ) => {
   var Router = useRouter();
-  
-	var proxy = config.config[config.proxy];
-	var prefix = proxy.prefix;
-	
-	var proxied = prefix + proxy.encodeUrl(decodeURIComponent(Router.query.query||new URLSearchParams(Router.asPath.replace('/route', '')).get('query')));
 
-  return (
-    <>
-      <Script id="proxiedscript">
-        {`
-          location.href = "${proxied}"
-        `}
-      </Script>
-    </>
-  )
+  if (global.window) {
+
+    var configP = global.window.localStorage['ill@proxy'];
+    
+  	var proxy = config.config[configP||config.proxy];
+  
+  	var prefix = proxy.prefix;
+    
+    var unp = decodeURIComponent(decodeURIComponent(Router.query.query||new URLSearchParams(Router.asPath.replace('/route', '')).get('query'))).trim().replace(/\s*/gi, '');
+  
+  	var proxied = decodeURIComponent(prefix + proxy.encodeUrl(unp));
+
+    console.log(proxied)
+    
+  
+    return (
+      <>
+        <Script id="proxiedscript">
+          {`
+            location.href = "${proxied}"
+          `}
+        </Script>
+      </>
+    )
+  }
 }
 
 export default Route;

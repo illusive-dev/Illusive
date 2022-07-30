@@ -11,19 +11,148 @@ body {
 }
 
 [data-theme="classic"] {
-	--bg-color: #181818 /* black, #181818 */;
-	--font-color: #a6a6a6 /* green,  */;
+  --setbox: #D9D9D9;
+	--bg-color: #181818;
+  --appBG: #232323;
+	--font-color: #a6a6a6;
 	--ui: #808080 ;
   --clock-hover: #ebebeb;
-  --qlimg-hover-background: #5e5b5b3b;
-  --qlimg-hover-shadow: #ffffff3b;
+  --ql-dock: #000000;
+  --main: #232323;
+  --hr: #3C3C3C;
+  --dock-input: #171717;
+  --dockInner-s: rgba(55, 55, 55, 0.25);
+  --controls-btns: white;
+  --controls-btns-hover: #1a66ff;
+  --mark: #8F8F8F;
+  --caret: white;
+  --settings-bg: #333;
+}
+
+[data-theme="classic"]::-webkit-scrollbar-track {
+  background: #232323;
+  scrollbar-color: var(--appBG) var(--bg-color);
+}
+
+#tsparticles[data-theme="light"] {
+  display: none;
+}
+
+#lightparticles[data-theme="light"] {
+  display: block !important;
+}
+
+#lightparticles {
+  display: none;
+}
+
+[data-theme="summer"] {
+  --setbox: #d5c2a9;
+  --bg-color: #DBD0C0;
+  --appBG: #F9E4C8;
+  --font-color: #a68e76;
+  --ui: #E6DDC6;
+  --clock-hover: #7d7d7d;
+  --ql-dock: #ffffff;
+  --main: #b0b0b0;
+  --hr: #E6DDC6;
+  --dock-input: #fffaf5;
+  --dockInner-s: rgb(253, 236, 219);
+  --controls-btns: #a6937a;
+  --controls-btns-hover: #776753;
+  --mark: #b9a592;
+  --caret: #a68e76;
+  --settings-bg: #d5c2a9;
+}
+
+[data-theme="light"] {
+  --setbox: #4a4a4a;
+  --bg-color: #e3e3e3;
+  --appBG: #f0f0f0;
+  --font-color: #000000;
+  --ui: #333;
+  --clock-hover: #7d7d7d;
+  --ql-dock: #ffffff;
+  --main: #b0b0b0;
+  --hr: #3d3d3d;
+  --dock-input: #fff;
+  --dockInner-s: rgba(255, 255, 255, 0.25);
+  --controls-btns: #000000;
+  --controls-btns-hover: #525252;
+  --mark: #6e6e6e;
+  --caret: black;
+  --settings-bg: #ccc;
 }
 
 [data-theme="hacker"] {
-	--bg-color: #000000 /* black, #181818 */;
-	--font-color: #37ff00 /* green,  */;
-	--ui: #1f1f1f ;
+  --setbox: #0a1108;
+	--bg-color: #000000;
+  --appBG: #050904;
+	--font-color: #37ff00;
+	--ui: #0a1108;
   --clock-hover: #197500;
-  --qlimg-hover-background: #37ff00;
-  --qlimg-hover-shadow: #37ff00;
+  --ql-dock: #000000;
+  --main: #232323;
+  --hr: #BDBCBC;
+  --dock-input: black;
+  --dockInner-s: rgba(55, 55, 55, 0.25);
+  --controls-btns: #2dd200;
+  --controls-btns-hover: #085e01;
+  --mark: #036400;
+  --caret: #2dd200;
+  --settings-bg: #141414;
+}
+
+[data-theme="ember"] {
+  --setbox: #533131;
+  --bg-color: #4a2e2e;
+  --appBG: #684141;
+  --font-color: #ffc6c6;
+  --ui: #533131;
+  --clock-hover: #866060;
+  --hr: #533131;
+  --dock: #684141;
+  --dock-input: #442929;
+  --dockInner-s: rgb(128, 84, 84);
+  --controls-btns: #FF9A9A;
+  --controls-btns-hover: #A46262;
+  --mark: #664242;
+  --caret: #bf8c8c;
+  --settings-bg: #533131;
+}
+
+[data-theme="mint"] {
+    --setbox: #2B8E4D;
+    --bg-color: #b6ffce;
+    --appBG: #42AF67;
+    --font-color: black;
+    --ui: #23763F;
+    --clock-hover: #23e462;
+    --hr: #2B8E4D;
+    --dock: #42AF67;
+    --dock-input: #77d097;
+    --dockInner-s: #3c9d5e;
+    --controls-btns: #46c871;
+    --controls-btns-hover: #37bb62;
+    --mark: #55cc7e;
+    --caret: #6AED96;
+    --settings-bg: #2B8E4D;
+}
+
+[data-theme="oldmint"] {
+  --setbox: #2B8E4D;
+  --bg-color: #23763F;
+  --appBG: #42AF67;
+  --font-color: #6AED96;
+  --ui: #23763F;
+  --clock-hover: #23e462;
+  --hr: #2B8E4D;
+  --dock: #42AF67;
+  --dock-input: #39995b;
+  --dockInner-s: #3c9d5e;
+  --controls-btns: #46c871;
+  --controls-btns-hover: #37bb62;
+  --mark: #55cc7e;
+  --caret: #6AED96;
+  --settings-bg: #2B8E4D;
 }

@@ -1,6 +1,5 @@
 const Bare = require('@tomphttp/bare-server-node');
 const Http = require('http');
-const puppeteer = require('puppeteer');
 
 const fetch = (...args) => new Promise(r=>import('node-fetch').then(e=>r(e.default(...args))));
 
@@ -19,24 +18,6 @@ Server.on('request', async (req, res) => {
 	if (bareServer.shouldRoute(req)) {
 		bareServer.routeRequest(req, res);
 	} else {
-    if (req.url=="/webscrot") {
-      const url = req.query.url;
-      const browser = await puppeteer.launch();
-      const page = await browser.newPage();
-      await page.setViewport({
-        width:1280,
-        height:720
-      });
-      await page.goto(url);
-      await page.waitForTimeout(1500);
-
-      const buffer = await page.screenshot();
-
-      res.setHeader("Content-Type", 'image/png');
-      res.setHeader("Content-Disposition", `inline; filename=${encodeURI(url)}.png`);
-
-      return res.send(buffer);
-    } else {
 	    var n = [];
 	    req.on('data', (data)=>n.push(data)).on('end', async () => {
 	      var init = {headers: req.headers, method: req.method}
@@ -48,7 +29,6 @@ Server.on('request', async (req, res) => {
 	      return res.writeHead(request.status, request.headers).end(blob);
 	    })
     }
-		}
 	}
 });
 

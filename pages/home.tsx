@@ -73,21 +73,37 @@ const Home: NextPage = ({ apps }) => {
     });
 
     const themeHandler = ()=>{
-      if (localStorage.getItem("theme")) {
-        var theme = localStorage.getItem("theme");
+      if (localStorage.getItem("ill@theme")) {
+        var theme = localStorage.getItem("ill@theme");
         var docs = document.querySelectorAll("*");
         docs.forEach(el=>{
-          el.setAttribute("data-theme", theme);
+          el.dataset.theme = theme;
         })
       }
     }
   
     window.onload = (e)=>{
+      setTimeout(function() {
+        if (localStorage.getItem('ill@title')) {
+          document.title = localStorage.getItem('ill@title');
+        } else {
+          document.title = 'Illusive';
+        }
+      
+        if (localStorage.getItem('ill@icon')) {
+          document.querySelector('link[rel="icon"]').href = localStorage.getItem('ill@icon');
+        } else {
+          document.querySelector('link[rel="icon"]').href = '/favicon.ico';
+        }
+      }, 1)
+      
       themeHandler();
     }
+
+    themeHandler();
 	}	
 	return (
-    <div className={styles.main}>
+    <div className={styles.main} data-theme="classic">
       <Head>
         <title>Illusive | Frame Page</title>
         <meta name="description" content="Illusive | Gateway to Evading Censorship" />
@@ -120,6 +136,65 @@ const Home: NextPage = ({ apps }) => {
             particles: {
               color: {
                 value: "#ffff",
+              },
+              move: {
+                direction: "right",
+                enable: true,
+                outModes: {
+                  default: "out",
+                },
+                random: false,
+                speed: 0.673,
+                straight: false,
+              },
+              number: {
+                density: {
+                  enable: true,
+                  area: 800,
+                },
+                value: 48,
+              },
+              opacity: {
+                value: 0.6814501258678471,
+                random: true,
+                anim: {
+                  enable: true,
+                  speed: 0.24362316369040352,
+                  opacity_min: 0.03248308849205381,
+                  sync: false
+                }
+              },
+              shape: {
+                type: "circle",
+              },
+              size: {
+                anim: {
+                  enable: true,
+                  speed: 2.872463273808071,
+                  size_min: 2.436231636904035,
+                  sync: false
+                },
+                value: { min: 2, max: 3 },
+              },
+            },
+            detectRetina: true,
+          }}
+        />
+
+        <Particles
+          id="lightparticles"
+          init={particlesInit}
+          loaded={particlesLoaded}
+          options={{
+            fpsLimit: 120,
+            interactivity: {
+              events: {
+                resize: true,
+              },
+            },
+            particles: {
+              color: {
+                value: "#222",
               },
               move: {
                 direction: "right",

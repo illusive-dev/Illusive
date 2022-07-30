@@ -49,14 +49,28 @@ if (global.window) {
     });
   }
   const themeHandler = ()=>{
-    if (localStorage.getItem("theme")) {
-      var theme = localStorage.getItem("theme");
+    if (localStorage.getItem("ill@theme")) {
+      var theme = localStorage.getItem("ill@theme");
       var docs = document.querySelectorAll("*");
       docs.forEach(el=>{
         el.setAttribute("data-theme", theme);
       })
     }
   }
+
+  setTimeout(function() {
+    if (localStorage.getItem('ill@title')) {
+      document.title = localStorage.getItem('ill@title');
+    } else {
+      document.title = 'Illusive';
+    }
+  
+    if (localStorage.getItem('ill@icon')) {
+      document.querySelector('link[rel="icon"]').href = localStorage.getItem('ill@icon');
+    } else {
+      document.querySelector('link[rel="icon"]').href = '/favicon.ico';
+    }
+  }, 1)
 
   window.onload = (e)=>{
     themeHandler();
@@ -127,7 +141,7 @@ const Apps: NextPage = ({ apps }) => {
   return (
     <div className={styles.main}>
       <Head>
-        <title>Illusive</title>
+        <title>Illusive | Collections</title>
         <meta name="description" content="Illusive | Gateway to Evading Censorship" />
         <meta name="theme-color" content="#2467a5" />
         <link rel="icon" href="/favicon.ico" />

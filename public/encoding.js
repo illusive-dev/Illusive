@@ -16,6 +16,11 @@ const dxor = {
   }
 }
 
+const dillusive = {
+  encode:(e,n=2)=>(l="a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz",e?encodeURIComponent(e.toString().split("").map(e=>l.indexOf(e)>-1?l[l.indexOf(e)+n]:e).join("")):e),
+  decode:(e,n=2)=>(l="a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz",e?decodeURIComponent(e).toString().split("").map(e=>l.indexOf(e)>-1?l[l.indexOf(e)-n]:e).join(""):e)
+};
+
 const dplain = {
   encode(str) {
     if (!str) return str;

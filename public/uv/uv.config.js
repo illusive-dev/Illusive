@@ -34,7 +34,7 @@ const plain = {
 const base64 = {
   encode(str) {
     if (!str) return str;
-    var encoded = btoa(encodeURIComponent(str));
+    var encoded = btoa((str));
     if (!encoded.endsWith('/')) return encoded+'/';
     else return encoded
   },

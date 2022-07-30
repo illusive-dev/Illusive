@@ -1,5 +1,5 @@
 .main {
-  background: #232323;
+  background: var(--appBG);
   background-size: 300%;
   height: 100vh;
   width: 100vw;
@@ -26,8 +26,8 @@
 }
 
 .qlimg:hover {
-  box-shadow: 0 0 20px #ffffff3b;
-  background-color: #5e5b5b3b;
+  box-shadow: 0 0 20px #040404a3;
+  background-color: #0404043b;
 }
 
 .main-se .img {
@@ -40,7 +40,7 @@
 .main-box {
   width: max-content;
   border-radius: 100px;
-  background: black;
+  background: var(--ui);
   height: 30px;
   position: relative;
   display: flex;
@@ -48,7 +48,7 @@
   align-items: center;
   padding: 14px 18px 10px 18px;
   gap: 10px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), inset 0px 4px 4px rgba(155, 150, 150, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   max-width: 304px;
 }
 

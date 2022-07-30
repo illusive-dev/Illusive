@@ -1,16 +1,19 @@
 .main {
-  background: var(--bg-color);
+  color: var(--font-color);
+  background: var(--appBG);
 	background-size: 300%;
   height: 100vh;
   width: 100vw;
   position: absolute;
   top: 0;
+  overflow: hidden auto;
   left: 0;
 }
 
 .main h1 {
-	color: white;
+	color: var(--font-color);
 	padding: 12px;
+  margin: 0;
 }
 
 .main h1 mark {
@@ -22,8 +25,7 @@
 }
 
 .main hr {
-	background: #3C3C3C;
-	color: #3C3C3C;
+	background: var(--hr);
 	border: none;
 	height: 5px;
 	border-radius: 2px;
@@ -31,14 +33,14 @@
 }
 
 .items {
-	width: 10%;
+	width: min-content;
 	margin: 10px;
 	display: flex;
 	flex-wrap: wrap;
 }
 
 .settitem {
-	padding: 10px;
+	padding: 2px;
 	text-align: right;
 	float: right;
 	white-space: nowrap;
@@ -47,7 +49,7 @@
 .settitem h2 {
 	font-size: 16px;
 	font-weight: bolder;
-	color: #C7C7C7;
+	color: var(--font-color);
 	-webkit-transition: -webkit-transform 0.4s;
 	transition: transform 0.4s;
 }
@@ -61,7 +63,7 @@
 #setbox {
 	display: block;
 	margin-right: 15px;
-	background-color: #D9D9D9;
+	background-color: var(--setbox);
 	width: 40px;
 	height: 40px;
 	border: none;
@@ -72,45 +74,45 @@
 }
 
 .settingsShow {
-	color: white;
+	color: var(--font-color);
 }
 
 .settingsShow h2 {
-	font-size: 40px;
-	position: absolute;
-	left: 35%;
-	top: 12%;
+  font-size: 35px;
+  margin-top: -215px;
+  position: relative;
+  left: 170px;
 }
 
 .settingContainers {
   display: flex none;
   flex-wrap: wrap;
-  width: 70%;
+  width: 100%;
 
   position: relative;
 }
 
 .settingContainer {
   position: absolute;
-	left: 50%;
-	top: 12%;
-
-  width: 350px;
-  height: 150px;
-
+  left: 170px;
+  margin-top: -25px !important;
+  padding-left: 40px;
+  top: 10%;
+  width: 90%;
+  height: auto;
   border: none;
   border-radius: 10px;
 }
 
-#settingTheme {
+#currentSettingTab {
   margin: auto;
 }
 
-#settingTheme ul {
+#currentSettingTab ul {
   width: 10%;
 }
 
-#settingTheme ul li {
+#currentSettingTab ul li {
   padding: 10px;
   cursor: pointer;
 
@@ -120,8 +122,69 @@
 	transition: transform 0.4s;
 }
 
-#settingTheme ul li:hover {
+#currentSettingTab ul li:hover {
   color: #949494;
   -webkit-transform: scale(1.2) rotate(0.01deg);
 	transform: scale(1.2);
+}
+
+.themesOverlaySettings {
+  width: max-content;
+  max-width: calc(100% - 170px);
+  min-width: 430px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px;
+  background: var(--settings-bg);  
+}
+
+.themesSettingOption {
+  width: 300px;
+  height: auto;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.generalSetting {
+  width: 100%;
+}
+
+.settingInput {
+  padding: 10px;
+  background: var(--dock-input);
+  border-radius: 4px;
+  width: 300px;
+  outline: none;
+  border: 0;
+  color: var(--font-color);
+  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%);
+  letter-spacing: 0;
+  font-weight: lighter;
+  font-size: 13px;
+  font-family: Roboto, sans-serif;
+}
+
+.settingInput::placeholder {
+  color: var(--font-color);
+  opacity: 0.8;
+}
+
+.settingButton {
+  padding: 10px;
+  background: var(--dock-input);
+  border-radius: 4px;
+  margin-left: 5px;
+  width: auto;
+  outline: none;
+  border: 0;
+  color: var(--font-color);
+  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%);
+  letter-spacing: 0;
+  font-weight: lighter;
+  font-size: 13px;
+  font-family: Roboto, sans-serif;
 }

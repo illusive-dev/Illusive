@@ -19,7 +19,7 @@ var history = [];
 const openApplication: Function = (action, e, Router) => {
   var frame = window.parent.document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
   if (action=='proxy') {
-    history.push({"uri":uri});
+    history.push({"uri":e});
     frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(e));
   }
   else if (action=='redirect') frame.src = e;
@@ -58,10 +58,55 @@ const cancelEvent: Function = (e) => {
 }
 
 if (typeof window !== "undefined") {
+      var urlbar = document.getElementById("urlbar")
+      urlbar.addEventListener('focus', (e) => {
+        
+      })
+      urlbar.addEventListener("keyup", (e) => {
+        if (urlbar.innerText.trim()) urlbar.setAttribute('val', 'true'); else urlbar.removeAttribute('val');
+        if(e.keyCode === 13) {
+          e.preventDefault();
+            document.getElementById('urlbar').blur()
+            document.getElementById('urlbar').innerHTML = (document.getElementById('urlbar').innerText);
+            var uri = document.getElementById('urlbar').innerText;
+            var removeHandler = uri.slice((Math.max(uri.lastIndexOf("://"))) + 3);
+  		      var frame = document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
+  		      if (!uri.startsWith("https://")&&!uri.startsWith('http://')) {
+  			      uri = encodeURIComponent("https://google.com/search?q="+(decodeURIComponent(uri)));
+  		      } else if(uri.startsWith("https://") || uri.startsWith("http://")) {
+              if(uri.startsWith("https://")) {
+                document.getElementById('urlbar').innerHTML = ""
+                document.getElementById('urlbar').innerHTML = `<span class="${styles['marking']}">https://</span>${removeHandler}`
+              } else if(uri.startsWith("http://")) {
+                document.getElementById('urlbar').innerHTML = ""
+                document.getElementById('urlbar').innerHTML = `<span class="${styles['marking']}">http://</span>${removeHandler}`
+              }
+						}
+          history.push({"uri":decodeURI(uri)});
+          console.log(history);
+          console.log(this);
+					frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(uri));
+        }
+    })
+  
   var el = document.getElementsByClassName(styles['historyTab'])[0];
   el.style.display = "none";
   
   window.onload = function(e) {
+    setTimeout(function() {
+      if (localStorage.getItem('ill@title')) {
+        document.title = localStorage.getItem('ill@title');
+      } else {
+        document.title = 'Illusive';
+      }
+    
+      if (localStorage.getItem('ill@icon')) {
+        document.querySelector('link[rel="icon"]').href = localStorage.getItem('ill@icon');
+      } else {
+        document.querySelector('link[rel="icon"]').href = '/favicon.ico';
+      }
+    }, 1)
+    
     var contextElement = document.getElementById(styles["context-menu"]);
 		window.addEventListener("contextmenu",function(event){
 		  event.preventDefault();
@@ -103,36 +148,6 @@ if (typeof window !== "undefined") {
         if (a.classList.contains(styles['apps-up'])) toggleDrop()
       }
     });*/
-
-      var urlbar = document.getElementById("urlbar")
-      urlbar.addEventListener('focus', (e) => {
-        
-      })
-      urlbar.addEventListener("keyup", (e) => {
-        if (urlbar.innerText.trim()) urlbar.setAttribute('val', 'true'); else urlbar.removeAttribute('val');
-        if(e.keyCode === 13) {
-          e.preventDefault();
-            document.getElementById('urlbar').blur()
-            document.getElementById('urlbar').innerHTML = (document.getElementById('urlbar').innerText);
-            var uri = document.getElementById('urlbar').innerText;
-            var removeHandler = uri.slice((Math.max(uri.lastIndexOf("://"))) + 3);
-  		      var frame = document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
-  		      if (!uri.startsWith("https://")&&!uri.startsWith('http://')) {
-  			      uri = encodeURIComponent("https://google.com/search?q="+(decodeURIComponent(uri)));
-  		      } else if(uri.startsWith("https://") || uri.startsWith("http://")) {
-              if(uri.startsWith("https://")) {
-                document.getElementById('urlbar').innerHTML = ""
-                document.getElementById('urlbar').innerHTML = `<span class="${styles['marking']}">https://</span>${removeHandler}`
-              } else if(uri.startsWith("http://")) {
-                document.getElementById('urlbar').innerHTML = ""
-                document.getElementById('urlbar').innerHTML = `<span class="${styles['marking']}">http://</span>${removeHandler}`
-              }
-						}
-          history.push({"uri":uri});
-          console.log(history);
-					frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(uri));
-        }
-    })
 		
     // Clock
     setTimeout(function(){
@@ -154,8 +169,8 @@ if (typeof window !== "undefined") {
   }
 
   const themeHandler = ()=>{
-    if (localStorage.getItem("theme")) {
-      var theme = localStorage.getItem("theme");
+    if (localStorage.getItem("ill@theme")) {
+      var theme = localStorage.getItem("ill@theme");
       var docs = document.querySelectorAll("*");
       docs.forEach(el=>{
         el.setAttribute("data-theme", theme);
@@ -163,9 +178,11 @@ if (typeof window !== "undefined") {
     }
   }
 
-  window.onload = (e)=>{
-    themeHandler();
-  }
+  window.theme = themeHandler;
+
+  onload();
+
+  themeHandler();
 }
 
 const toggleTabs: Function = () => {
@@ -201,6 +218,8 @@ const iframereload = () => {
 //there are already endpoints for this /route.tsx
 const Home: NextPage = ({ apps }) => {
   var Router = useRouter();
+
+  if (global.window) global.window.Router = Router;
   
   const Apps: Function = () => {
     if (global.window) {
@@ -226,7 +245,7 @@ const Home: NextPage = ({ apps }) => {
 	};
   
   return (
-    <div className={styles.main} data-theme="classic">
+    <div className={styles.main} data-theme={"classic"}>
       <Head>
         <title>Illusive</title>
         <meta name="description" content="Illusive | Gateway to Evading Censorship" />
@@ -250,7 +269,7 @@ const Home: NextPage = ({ apps }) => {
 					<div className={styles['historyapps']}>
 						{
 							history.map(tab=>{
-								return (
+                return (
 									<div key={tab.title.toLowerCase()} className={styles['historyapp']} onClick={((e)=>{openApplication("proxy", tab.url, Router);toggleTabs();})}>
 										<div className={styles['historyapptext']}>
                       <p>{tab.uri}</p>
@@ -275,6 +294,15 @@ const Home: NextPage = ({ apps }) => {
                 )
               }
 							if (app.type == "app") {
+                if (!app.action) {
+  	              return (
+  		                <a key={app.name} onClick={cancelEvent}>
+  		  								<div key={app.name} className={`${styles.app} ${styles.normalLink}`} onClick={((e)=>openApplication(app.action, app.url, Router))}>
+  		  									<img style={{filter: app.filter||'invert(0)', width: (app.size+'px')||'30px', height: (app.size+'px')||'30px'}} src={app.image} alt={app.name}></img>
+  		  								</div>
+  		                </a>
+  								)
+                }
 	              return (
 		                <a key={app.name} onClick={cancelEvent}>
 		  								<div key={app.name} className={styles.app} onClick={((e)=>openApplication(app.action, app.url, Router))}>
@@ -299,7 +327,7 @@ const Home: NextPage = ({ apps }) => {
 				
         <div className={styles['bottom-container']}>
 					<div className={styles['bottom-left-menu']}>
-						<MdTab id='tabby' className={styles['open-tabs']} onClick={((e)=>{toggleTabs()})} width="25" height="25" />
+						<MdTab id='tabby' className={`${styles['open-tabs']} ${styles['fillS']}`} onClick={((e)=>{toggleTabs()})} width="25" height="25" />
 	        </div>
 					
 	        <div className={styles['user-form']}>
@@ -309,14 +337,14 @@ const Home: NextPage = ({ apps }) => {
 	        </div>
 					
 	        <div className={styles['bottom-right-menu']}>
-                          <svg width="16" height="16" className={styles['main-nav-icon']} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']}`} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M5.83331 0C2.61169 0 0 2.61166 0 5.83334V24.1667C0 27.3883 2.61169 30 5.83331 30H20C28.2842 30 35 23.2843 35 15C35 6.71573 28.2843 0 20 0H5.83331ZM20.0607 8.06067C20.6464 7.47488 20.6464 6.52512 20.0607 5.93933C19.4749 5.35355 18.5251 5.35355 17.9393 5.93933L9.93933 13.9393C9.35358 14.5251 9.35358 15.4749 9.93933 16.0607L17.9393 24.0607C18.5251 24.6465 19.4749 24.6465 20.0607 24.0607C20.6464 23.4749 20.6464 22.5251 20.0607 21.9393L13.1213 15L20.0607 8.06067Z" fill="#D9D9D9"/>
               </svg>
-              <svg width="16" height="16" className={styles['main-nav-icon']} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']}`} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M15 0C6.71576 0 0 6.71573 0 15C0 23.2843 6.7157 30 15 30H29.1667C32.3883 30 35 27.3883 35 24.1667V5.83334C35 2.61166 32.3883 0 29.1667 0H15ZM15.9393 21.9393C15.3536 22.5251 15.3536 23.4749 15.9393 24.0607C16.5251 24.6465 17.4749 24.6465 18.0607 24.0607L26.0607 16.0607C26.6464 15.4749 26.6464 14.5251 26.0607 13.9393L18.0607 5.93933C17.4749 5.35355 16.5251 5.35355 15.9393 5.93933C15.3536 6.52512 15.3536 7.47488 15.9393 8.06067L22.8787 15L15.9393 21.9393Z" fill="#D9D9D9"/>
               </svg>
 	            <IoReloadOutline id='reload-frame' className={`${styles['main-nav-icon']} ${styles['reload-btn']}`} onClick={iframereload} target="if" />
-	            <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['star-btn']}`} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+	            <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']} ${styles['star-btn']}`} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M27.5 12.6249C27.625 11.9999 27.125 11.2499 26.5 11.2499L19.375 10.2499L16.125 3.74992C16 3.49992 15.875 3.37492 15.625 3.24992C15 2.87492 14.25 3.12492 13.875 3.74992L10.75 10.2499L3.625 11.2499C3.25 11.2499 3 11.3749 2.875 11.6249C2.375 12.1249 2.375 12.8749 2.875 13.3749L8 18.3749L6.75 25.4999C6.75 25.7499 6.75 25.9999 6.875 26.2499C7.25 26.8749 8 27.1249 8.625 26.7499L15 23.3749L21.375 26.7499C21.5 26.8749 21.75 26.8749 22 26.8749C22.125 26.8749 22.125 26.8749 22.25 26.8749C22.875 26.7499 23.375 26.1249 23.25 25.3749L22 18.2499L27.125 13.2499C27.375 13.1249 27.5 12.8749 27.5 12.6249Z" fill="white"/>
               </svg>
 	        </div>

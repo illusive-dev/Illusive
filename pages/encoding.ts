@@ -16,6 +16,15 @@ const xor: Object = {
   }
 }
 
+const illusive: Object = {
+  encode(str: String | undefined, key: Number | undefined = 2) {
+    var letters = 'a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz';return str?encodeURIComponent(str.toString().split('').map(e=>letters.indexOf(e)>-1?letters[letters.indexOf(e) + key]:e).join('')):str;
+  },
+  decode(str: String | undefined, key: Number | undefined = 2) {
+    var letters = 'a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz';return str?decodeURIComponent(str).toString().split('').map(e=>letters.indexOf(e)>-1?letters[letters.indexOf(e) - key]:e).join(''):str;
+  }
+}
+
 const plain: Object = {
   encode(str: String | undefined) {
     if (!str) return str;
@@ -30,9 +39,9 @@ const plain: Object = {
 }
 
 const base64: Object = {
-  encode(str: String | undefined) {
+  encode(str: String | undefined, encode: Boolean | undefined = true) {
     if (!str) return str;
-    var encoded = btoa(encodeURIComponent(str));
+    var encoded = btoa(encode?encodeURIComponent(str):str);
     if (!encoded.endsWith('/')) return encoded+'/';
     else return encoded
   },
@@ -44,4 +53,4 @@ const base64: Object = {
   }
 }
 
-export default {xor, plain, base64};
+export default {xor, plain, base64, illusive};

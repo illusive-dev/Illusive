@@ -7,8 +7,8 @@ export default {
   config: {
     'Ultraviolet': {
       prefix: '/service/uv/',
-      bare: 'https://uv.holyub.xyz/',
-      encodeUrl: (e=>decodeURIComponent(Encoding.base64.encode(e).replace(/\/$/g,''))),
+      bare: 'https://incog.dev/bare',
+      encodeUrl: (e=>encodeURIComponent(decodeURIComponent(Encoding.base64.encode(e).replace(/\/$/g,'')))),
       decodeUrl: (e=>decodeURIComponent(Encoding.base64.decode(e).replace(/\/$/g,''))),
       handler: '/uv/uv.handler.js',
       bundle: '/uv/uv.bundle.js',
@@ -19,8 +19,8 @@ export default {
       prefix: '/service/dip/',
       encoding: 'base64',
       ws: true,
-      encodeUrl: Encoding.base64.encode,
-      decodeUrl: Encoding.base64.decode,
+      encodeUrl: (e=>(decodeURIComponent(Encoding.base64.encode(e)))),
+      decodeUrl: (e=>decodeURIComponent(Encoding.base64.decode(e))),
       cookies: true,
       worker: true,
       bare: {

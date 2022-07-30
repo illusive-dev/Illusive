@@ -35145,12 +35145,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "xor": () => (/* binding */ xor),
 /* harmony export */   "plain": () => (/* binding */ plain),
-/* harmony export */   "base64": () => (/* binding */ base64)
+/* harmony export */   "base64": () => (/* binding */ base64),
+/* harmony export */   "illusive": () => (/* binding */ illusive),
 /* harmony export */ });
 // -------------------------------------------------------------
 // WARNING: this file is used by both the client and the server.
 // Do not use any browser or node-specific API!
 // -------------------------------------------------------------
+const illusive = {encode(e,n=2){var o="a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz";return e?encodeURIComponent(e.toString().split("").map(e=>o.indexOf(e)>-1?o[o.indexOf(e)+n]:e).join("")):e},decode(e,n=2){var o="a1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyza1b2c3d4e5f6g7h8i9jklmnopqrstuvwxyz";return e?decodeURIComponent(e).toString().split("").map(e=>o.indexOf(e)>-1?o[o.indexOf(e)-n]:e).join(""):e}};
+  
 const xor = {
     encode(str){
         if (!str) return str;
@@ -39289,7 +39292,7 @@ class Ultraviolet {
     get sourceJS() {
         return this.js.source.bind(this.js);
     };
-    static codec = { xor: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.xor, base64: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.base64, plain: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.plain };
+    static codec = { illusive: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.illusive, xor: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.xor, base64: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.base64, plain: _codecs_js__WEBPACK_IMPORTED_MODULE_4__.plain };
     static mime = _mime_js__WEBPACK_IMPORTED_MODULE_5__["default"];
     static setCookie = set_cookie_parser__WEBPACK_IMPORTED_MODULE_3__;
     static openDB = idb__WEBPACK_IMPORTED_MODULE_10__.openDB;
