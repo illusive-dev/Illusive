@@ -35,6 +35,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/collection": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/collection.js"
+    ],
     "/home": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
@@ -45,10 +50,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/route.js"
     ],
-    "/service/dip/[url]": [
+    "/settings": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/service/dip/[url].js"
+      "static/chunks/pages/settings.js"
     ]
   },
   "ampFirstPages": []
