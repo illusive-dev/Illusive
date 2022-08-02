@@ -48,7 +48,7 @@ const base64 = {
 
 self.__uv$config = {
     prefix: '/service/uv/',
-    bare: 'https://uv.holyub.xyz/',
+    bare: 'https://bare.'+location.hostname,
     encodeUrl: (e=>decodeURIComponent(Ultraviolet.codec.base64.encode(e))),
     decodeUrl: (e=>decodeURIComponent(Ultraviolet.codec.base64.decode(e))),
     handler: '/uv/uv.handler.js',

@@ -8,7 +8,7 @@ self.__DIP.config = {
   worker: true,
   bare: {
     version: 2,
-    path: 'https://uv.holyub.xyz/',
+    path: 'https://bare.'+location.hostname,
   },
   tab: {
     title: 'Dynamic Interception Proxy',
