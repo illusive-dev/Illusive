@@ -22,8 +22,11 @@ const Tabs: NextPage = ({apps}) => {
     settingsTab.innerHTML = `<div class="${styles.themesOverlaySettings}">
 
       <div class="${styles.generalSetting}"><input id="tab-cloak-input" placeholder="Enter Title or Icon URL" class="${styles.settingInput}"><button class="${styles.settingButton}" id="tab-cloak-title">Title</button><button class="${styles.settingButton}" id="tab-cloak-icon">Icon</button><button class="${styles.settingButton}" id="tab-cloak-reset">Reset</button></div>
+    </div>
     
-    </div>`;
+    <hr class="${styles.hrshow}"><h2 class="${styles.h2show}">Custom Search Engine</h2>
+    <div class="${styles.themesOverlaySettings}"><div class="${styles.generalSetting}"><input id="custom-search-input" placeholder="Enter Search URL" class="${styles.settingInput}"><button class="${styles.settingButton}" id="custom-search-save">Save</button><button class="${styles.settingButton}" id="custom-search-reset">Reset (Google)</button><br><h3><b>Current</b> https://google.com/search?q=</h3></div></div>
+    `;
 
     var CloakInput = document.getElementById('tab-cloak-input');
 
@@ -60,8 +63,80 @@ const Tabs: NextPage = ({apps}) => {
       return top.window.location.reload();
     };
 
+    var ClassicTheme = `
+--setbox: #D9D9D9;
+--bg-color: #181818;
+--appBG: #232323;
+--font-color: #a6a6a6;
+--ui: #808080;
+--clock-hover: #ebebeb;
+--ql-dock: #000000;
+--main: #232323;
+--hr: #3C3C3C;
+--dock: rgba(55, 55, 55, 0.25);
+--dock-input: #171717;
+--dockInner-s: rgba(55, 55, 55, 0.25);
+--controls-btns: white;
+--controls-btns-hover: #1a66ff;
+--mark: #8F8F8F;
+--caret: white;
+--settings-bg: #333;
+    `
+
+    var custom = (localStorage['ill@css']||'').replace(/\[data\-theme\="custom"\]\s\{(.*?)/g, '$1').replace(/\n/g, '').replace(/\s/g, '').replace('}', '').split(';').join(';\n');
+    
     const settingsTab = document.getElementById(styles.currentSettingTab);
-    settingsTab.innerHTML = `<div class="${styles.themesOverlaySettings}"><img data-setting="classic" class="${styles.themesSettingOption}" src="/img/themes/classic.png"></img><img data-setting="hacker" class="${styles.themesSettingOption}" src="/img/themes/hacker.png"></img><img data-setting="light" class="${styles.themesSettingOption}" src="/img/themes/light.png"></img><img data-setting="summer" class="${styles.themesSettingOption}" src="/img/themes/summer.png"></img><img data-setting="ember" class="${styles.themesSettingOption}" src="/img/themes/ember.png"></img><img data-setting="mint" class="${styles.themesSettingOption}" src="/img/themes/mint.png"></img></div></div>`;
+    settingsTab.innerHTML = `<div class="${styles.themesOverlaySettings}"><img data-setting="classic" class="${styles.themesSettingOption}" src="/img/themes/classic.png"></img><img data-setting="hacker" class="${styles.themesSettingOption}" src="/img/themes/hacker.png"></img><img data-setting="light" class="${styles.themesSettingOption}" src="/img/themes/light.png"></img><img data-setting="summer" class="${styles.themesSettingOption}" src="/img/themes/summer.png"></img><img data-setting="ember" class="${styles.themesSettingOption}" src="/img/themes/ember.png"></img><img data-setting="mint" class="${styles.themesSettingOption}" src="/img/themes/mint.png"></img><img data-setting="fracital" class="${styles.themesSettingOption}" src="/img/themes/fracital.png"></img><img data-setting="terbium" class="${styles.themesSettingOption}" src="/img/themes/terb.png"></img><img data-setting="amber" class="${styles.themesSettingOption}" src="/img/themes/amber.png"></img></div></div><hr class="${styles.hrshow}"><h2 class="${styles.h2show}">Custom CSS</h2><div class="${styles.themesOverlaySettings}"><input id="custom-css-color" type="color" value="#000000" class="${styles.colorInput}"><input value="#000000" id="custom-css-box" class="${styles.settingInput}" style="width: 22%;margin-left: auto;"><textarea class="${styles.customTextArea}">${custom||ClassicTheme}</textarea><button id="saveBtn" class="${styles.settingButton}" style="width: 100%;">Save</button><button id="clearBtn" class="${styles.settingButton}" style="width: 100%;">Clear</button></div>`;
+
+    document.querySelector('input[type="color"]').addEventListener('change', (e) => {
+      var val = document.querySelector('input[type="color"]').value;
+
+      console.log(val);
+
+      document.querySelector('#custom-css-box').value = val;
+    })
+
+    document.querySelector('textarea').addEventListener('input', (e) => {
+      var text = document.querySelector('textarea').value;
+
+      var assign = `
+[data-theme="custom"] {
+  ${text}
+}
+      `
+
+      if (window.style) {
+        window.style.textContent = assign;
+      }
+
+      if (window.top.style) {
+        window.top.style.textContent = assign;
+      }
+    })
+
+    settingsTab.querySelector('#saveBtn').addEventListener('click', (e) => {
+      var text = document.querySelector('textarea').value;
+
+      var assign = `
+[data-theme="custom"] {
+  ${text}
+}
+      `
+
+      localStorage.setItem('ill@css', assign)
+
+      if (window.top.theme) window.top.theme();
+      if (window.theme) window.theme();
+
+      notify.show(`Custom CSS Set`, "success", 2000)
+    })
+
+    settingsTab.querySelector('#clearBtn').addEventListener('click', (e) => {
+      localStorage.removeItem('ill@css')
+
+      if (window.top.theme) window.top.theme();
+      if (window.theme) window.theme();
+    })
     
     const options = document.getElementById(styles.currentSettingTab).childNodes[0].childNodes;
     
@@ -117,6 +192,24 @@ const Tabs: NextPage = ({apps}) => {
 
     if (global.window) {
       const themeHandler = ()=>{
+        if (localStorage.getItem('ill@css')) {
+          if (window.style) window.style.remove();
+          
+          var a = document.createElement('style');
+          a.textContent = localStorage.getItem('ill@css');
+
+          document.head.appendChild(a);
+          
+          var theme = 'custom';
+          var docs = document.querySelectorAll("*");
+          docs.forEach(el=>{
+            el.setAttribute("data-theme", theme);
+          })
+
+          window.style = a;
+
+          return;
+        }
         if (localStorage.getItem("ill@theme")) {
           var theme = localStorage.getItem("ill@theme");
           var docs = document.querySelectorAll("*");
@@ -125,6 +218,8 @@ const Tabs: NextPage = ({apps}) => {
           })
         }
       }
+
+      window.theme = themeHandler;
   
       const themes = (e)=>{
         var theme = e.target.innerText.toLowerCase();

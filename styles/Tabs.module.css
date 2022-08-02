@@ -75,6 +75,8 @@
 
 .settingsShow {
 	color: var(--font-color);
+  display: block;
+  justify-items: center;
 }
 
 .settingsShow h2 {
@@ -82,6 +84,12 @@
   margin-top: -215px;
   position: relative;
   left: 170px;
+}
+
+.settingsShow h2.h2show {
+  margin-top: 5px !important;
+  left: -35px;
+  margin-bottom: 5px;
 }
 
 .settingContainers {
@@ -151,6 +159,7 @@
 
 .generalSetting {
   width: 100%;
+  text-align: center;
 }
 
 .settingInput {
@@ -181,10 +190,80 @@
   width: auto;
   outline: none;
   border: 0;
+  cursor: pointer;
   color: var(--font-color);
   box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%);
   letter-spacing: 0;
   font-weight: lighter;
   font-size: 13px;
   font-family: Roboto, sans-serif;
+}
+
+.hrshow {
+  margin-left: -50px;
+  margin-top: 10px;
+  
+}
+
+.customTextArea {
+  min-width: 500px;
+  color: var(--font-color);
+  background: var(--appBG);
+  border: 1px solid var(--bg-color);
+  width: 100% !important;
+  min-height: 300px;
+}
+
+.colorInput {
+  width: 70%;
+  background: var(--dock-input);
+  box-shadow: 0px 0px 5px 2px rgb(0 0 0 / 32%);
+  border: 0;
+  outline: 0;
+  height: 35px;
+  border-radius: 4px;
+}
+
+.historyItem {
+  width: calc(100% - 52px);
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 8px 3px 8px 12px;
+  margin: 7px auto;
+  border: none;
+  font-size: 15px;
+  gap: 9px;
+  background-color: var(--settings-bg);
+  border-radius: 8px;
+  transition: 150ms ease-in-out;
+  border: 2px solid transparent;
+  border-left: 6px solid transparent;
+}
+
+.historyItem:hover {
+  background-color: var(--appBG);
+  border: 2px solid var(--accent);
+  border-left: 6px solid var(--accent);
+}
+
+.historyItem img {
+  width: 20px;
+  height: 20px;
+}
+
+.historyItem p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.historyItem:hover p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  color: var(--accent);
+}
+
+.settingsShow h3 {
+  margin: auto;
+  margin-top: 15px;
 }

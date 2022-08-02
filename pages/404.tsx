@@ -6,9 +6,9 @@ import { IoChevronBack, IoHomeOutline } from 'react-icons/io5'
 import styles from '../styles/404.module.css'
 
 const ErrorPage: NextPage = () => {
-  const Router = useRouter;
+  const Router = useRouter();
 
-  const historyBack: Function = () => {
+  const historyBack = () => {
     if (global.window) {
       window.history.back();
     }

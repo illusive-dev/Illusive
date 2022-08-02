@@ -1,0 +1,60 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  background: #bb1b1b;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.over {
+  width: 70%;
+  height: auto;
+  display: block;
+}
+
+.over h2 {
+  font-weight: lighter;
+  font-size: 30px;
+  color: white;
+  display: block;
+}
+
+.over p {
+  font-size: 15px;
+  color: white;
+  margin-left: 0px;
+}
+
+.icon {
+  color: white;
+  display: block;
+  font-size: 30px;
+  width: 70px;
+  height: 70px;
+}
+
+.bottom {
+  text-align: right;
+}
+
+.bottom button {
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.returnbtn {
+  background: white;
+  border: 1px solid white;
+}
+
+.gobtn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+}

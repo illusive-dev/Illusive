@@ -48,7 +48,26 @@ if (global.window) {
       contextElement.classList.remove(styles.active);
     });
   }
+
   const themeHandler = ()=>{
+    if (localStorage.getItem('ill@css')) {
+      if (window.style) window.style.remove();
+      
+      var a = document.createElement('style');
+      a.textContent = localStorage.getItem('ill@css');
+
+      document.head.appendChild(a);
+      
+      var theme = 'custom';
+      var docs = document.querySelectorAll("*");
+      docs.forEach(el=>{
+        el.setAttribute("data-theme", theme);
+      })
+
+      window.style = a;
+
+      return;
+    }
     if (localStorage.getItem("ill@theme")) {
       var theme = localStorage.getItem("ill@theme");
       var docs = document.querySelectorAll("*");
@@ -57,6 +76,8 @@ if (global.window) {
       })
     }
   }
+
+  window.theme = themeHandler;
 
   setTimeout(function() {
     if (localStorage.getItem('ill@title')) {
@@ -139,7 +160,7 @@ const Apps: NextPage = ({ apps }) => {
   const particlesLoaded = () => {};
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} data-theme="classic">
       <Head>
         <title>Illusive | Collections</title>
         <meta name="description" content="Illusive | Gateway to Evading Censorship" />

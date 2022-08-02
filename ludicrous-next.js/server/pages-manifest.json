@@ -3,6 +3,10 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/api/apps": "pages/api/apps.js",
+  "/home": "pages/home.js",
+  "/route": "pages/route.js",
   "/": "pages/index.js",
-  "/home": "pages/home.js"
+  "/service/dip/[url]": "pages/service/dip/[url].js",
+  "/api/malware": "pages/api/malware.js",
+  "/404": "pages/404.js"
 }

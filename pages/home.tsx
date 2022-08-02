@@ -28,6 +28,7 @@ const openApplication: Function = (action, e, Router) => {
     frame.src = "/home";
   } else if (action=='route') {
     Router.replace(e)
+    if (global.window.location.pathname=='/home') global.window.parent.document.querySelector('iframe#frame').onload();
   }
   else frame.src = e;
 }
@@ -73,14 +74,34 @@ const Home: NextPage = ({ apps }) => {
     });
 
     const themeHandler = ()=>{
+      if (localStorage.getItem('ill@css')) {
+        if (window.style) window.style.remove();
+        
+        var a = document.createElement('style');
+        a.textContent = localStorage.getItem('ill@css');
+
+        document.head.appendChild(a);
+        
+        var theme = 'custom';
+        var docs = document.querySelectorAll("*");
+        docs.forEach(el=>{
+          el.setAttribute("data-theme", theme);
+        })
+
+        window.style = a;
+
+        return;
+      }
       if (localStorage.getItem("ill@theme")) {
         var theme = localStorage.getItem("ill@theme");
         var docs = document.querySelectorAll("*");
         docs.forEach(el=>{
-          el.dataset.theme = theme;
+          el.setAttribute("data-theme", theme);
         })
       }
     }
+
+    window.theme = themeHandler;
   
     window.onload = (e)=>{
       setTimeout(function() {
@@ -243,10 +264,10 @@ const Home: NextPage = ({ apps }) => {
         <div className={styles['main-se']}>
           <img src="/Illusive.png" className={styles.img} />
           <div className={styles['main-box']}>
-            <a className={styles['box-icon']} onClick={((e)=>clickEvent("proxy", "https://twitter.com", e))}>
+            <a className={styles['box-icon']} onClick={((e)=>clickEvent("proxy", "https://twitter.com/TitaniumNetDev", e))}>
               <img className={styles['qlimg']} src="/img/home/twitter.png" />
             </a>
-            <a className={styles['box-icon']} onClick={((e)=>clickEvent("proxy", "https://discord.com", e))}>
+            <a className={styles['box-icon']} onClick={((e)=>clickEvent("proxy", "https://discord.gg/unblock", e))}>
               <img className={styles['qlimg']} src="/img/home/discord.png" style={{width:'25px',height:'25px'}}/>
             </a>
             <a className={styles['box-icon']} onClick={((e)=>clickEvent("route", "/settings", e))}>

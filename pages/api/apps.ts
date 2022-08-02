@@ -42,7 +42,14 @@ const applications = [
 	{
 		type: "sep",
     col: false,
-	}, 
+	},
+  {
+		name: "Webretro",
+		type: "app",
+		url: "https://webretro.jimmynuetron.repl.co/",
+    action: "proxy",
+		image: "/img/apps/arch.jpg"
+	},
 	{
 		name: "Roblox",
 		type: "app",

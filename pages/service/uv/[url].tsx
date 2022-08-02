@@ -10,7 +10,12 @@ import { useRouter } from 'next/router'
 
 const Ultraviolet: NextPage = () => {
   return (
-    <Script src="/register/dip.js"></Script>
+    <>
+      <Head>
+        <title>Register SW</title>
+      </Head>
+      <Script src="/register/dip.js"></Script>
+    </>
   )
 }
 

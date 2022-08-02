@@ -126,6 +126,7 @@
   align-items: center;
   justify-content: space-around;
   box-shadow: inset 0px 4px 4px var(--dockInner-s);
+  z-index: 2;
 }
 
 .user-form form {
@@ -391,6 +392,7 @@
 
 .main-nav-icon path {
 	stroke-width: 53px;
+  transition: 150ms ease-in-out;
 }
 
 .historyTab {

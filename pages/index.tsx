@@ -14,22 +14,14 @@ import Link from 'next/link';
 import { AnimateOnChange } from '@nearform/react-animation';
 import {reactLocalStorage} from 'reactjs-localstorage';
 
-var history = [];
+import Paths from './prefix.ts';
 
-const openApplication: Function = (action, e, Router) => {
-  var frame = window.parent.document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
-  if (action=='proxy') {
-    history.push({"uri":e});
-    frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(e));
+var history = [
+  {
+    'uri': 'https://google.com',
+    'title': 'Coming Soon!'
   }
-  else if (action=='redirect') frame.src = e;
-  else if (action=='home') {
-    frame.src = "/home";
-  } else if (action=='route') {
-    Router.replace(e)
-  }
-  else frame.src = e;
-}
+];
 
 const toggleDrop: Function = (e) => {
   var el = document.getElementById('dropdown');
@@ -58,15 +50,44 @@ const cancelEvent: Function = (e) => {
 }
 
 if (typeof window !== "undefined") {
-      var urlbar = document.getElementById("urlbar")
-      urlbar.addEventListener('focus', (e) => {
-        
-      })
+  if (!(localStorage.getItem('ill@history'))) localStorage.setItem('ill@history', '[]')
+  
+  function addToHistory(tab) {
+      var h = document.getElementsByClassName(styles['historyapps'])[0];
+      var newTab = document.createElement("div");
+      var proxyFunc = `(e)=>{openApplication("proxy", tab.uri, Router);toggleTabs();};`
+
+      h.appendChild(newTab);
+
+      var ls = JSON.parse(localStorage.getItem('ill@history'));
+
+      tab.time = new Date().getTime();
+
+      if (tab.title=='Register SW') return;
+
+      ls.splice(0,0,tab);
+
+      console.log(ls)
+
+      localStorage.setItem('ill@history', JSON.stringify(ls));
+    }
+      var urlbar = document.getElementById("urlbar");
+      urlbar.onfocus = (e) => {
+        urlbar.isfocus = true;
+        urlbar.isblur = false;
+      };
+      urlbar.onblur = (e) => {
+        urlbar.isblur = true;
+        urlbar.isfocus = false;
+      };
+      urlbar.onpaste = (e) => {
+        urlbar.innerHTML = urlbar.innerText;
+      };
       urlbar.addEventListener("keyup", (e) => {
         if (urlbar.innerText.trim()) urlbar.setAttribute('val', 'true'); else urlbar.removeAttribute('val');
         if(e.keyCode === 13) {
           e.preventDefault();
-            document.getElementById('urlbar').blur()
+            document.getElementById('urlbar').blur();
             document.getElementById('urlbar').innerHTML = (document.getElementById('urlbar').innerText);
             var uri = document.getElementById('urlbar').innerText;
             var removeHandler = uri.slice((Math.max(uri.lastIndexOf("://"))) + 3);
@@ -83,11 +104,9 @@ if (typeof window !== "undefined") {
               }
 						}
           history.push({"uri":decodeURI(uri)});
-          console.log(history);
-          console.log(this);
 					frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(uri));
         }
-    })
+    })  
   
   var el = document.getElementsByClassName(styles['historyTab'])[0];
   el.style.display = "none";
@@ -150,25 +169,45 @@ if (typeof window !== "undefined") {
     });*/
 		
     // Clock
-    setTimeout(function(){
-      setInterval(function(){
-        var clock = document.getElementById("clock");
-        var x = new Date()
-        var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
-        var t = x.getHours();
-        if (t >= 12) t = t - 12;
-        if (t == 0) t = 12;
-    
-        var minutes = x.getMinutes();
-        if (minutes.toString().length==1) minutes = "0"+minutes;
-    
-        var x1 = t + ":" + minutes + ampm;
-        clock.innerText = x1;
-      }, 300);
-    }, 2000);
+    //addEventListener('load', (e) => {
+      setTimeout(function(){
+        setInterval(function(){
+          var clock = document.getElementById("clock");
+          var x = new Date()
+          var ampm = x.getHours() >= 12 ? ' PM' : ' AM';
+          var t = x.getHours();
+          if (t >= 12) t = t - 12;
+          if (t == 0) t = 12;
+      
+          var minutes = x.getMinutes();
+          if (minutes.toString().length==1) minutes = "0"+minutes;
+      
+          var x1 = t + ":" + minutes + ampm;
+          clock.innerText = x1;
+        }, 300);
+      }, 2000);
+    //})
   }
 
   const themeHandler = ()=>{
+    if (localStorage.getItem('ill@css')) {
+      if (window.style) window.style.remove();
+      
+      var a = document.createElement('style');
+      a.textContent = localStorage.getItem('ill@css');
+
+      document.head.appendChild(a);
+      
+      var theme = 'custom';
+      var docs = document.querySelectorAll("*");
+      docs.forEach(el=>{
+        el.setAttribute("data-theme", theme);
+      })
+
+      window.style = a;
+
+      return;
+    }
     if (localStorage.getItem("ill@theme")) {
       var theme = localStorage.getItem("ill@theme");
       var docs = document.querySelectorAll("*");
@@ -180,9 +219,72 @@ if (typeof window !== "undefined") {
 
   window.theme = themeHandler;
 
-  onload();
+  var frame = document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
 
-  themeHandler();
+  addEventListener('load', (e) => {
+    themeHandler();
+    frame.onbeforeunload = function(e) {
+      frame.loaded = false;
+    }
+    frame.onload = function(i) {
+      frame.onload = function(e) {
+        frame.loaded = true;
+        var path = frame.contentWindow.location.pathname;
+        
+        if (Paths[path]) {
+          var newPath = Paths[path];
+    
+          if (!urlbar.isfocus&&frame.loaded) {
+            urlbar.setAttribute('val', 'ill://'+newPath)
+            urlbar.innerHTML = `<span class="${styles.marking}">ill://</span>${newPath}`
+          }
+        } else {
+          if (!urlbar.isfocus&&frame.loaded) {
+            var toSet = path;
+            
+            if (toSet.startsWith('/service/')) {
+              console.log(toSet);
+              toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
+
+              console.log({url:toSet.href, name: frame.contentDocument.title});
+
+              addToHistory({url:toSet.href, name: frame.contentDocument.title})
+  
+              urlbar.setAttribute('val', toSet.href);
+              urlbar.innerHTML = `<span class="${styles.marking}">${toSet.protocol}//</span>${toSet.href.replace(toSet.protocol+'//', '')}`;
+            }
+          }
+        }
+    
+        setTimeout(function() {
+          var int = setInterval(function() {
+            if (!frame.contentWindow) return;
+            
+            try {var path = frame.contentWindow.location.pathname;} catch(e) {return;}
+            
+            if (Paths[path]) {
+              var newPath = Paths[path];
+        
+              if (!urlbar.isfocus&&frame.loaded) {
+                urlbar.setAttribute('val', 'ill://'+newPath)
+                urlbar.innerHTML = `<span class="${styles.marking}">ill://</span>${newPath}`
+              }
+            } else {
+              if (!urlbar.isfocus&&frame.loaded) {
+                var toSet = path;
+                if (toSet.startsWith('/service/')) {
+                  toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
+      
+                  urlbar.setAttribute('val', toSet.href);
+                  urlbar.innerHTML = `<span class="${styles.marking}">${toSet.protocol}//</span>${toSet.href.replace(toSet.protocol+'//', '')}`;
+                }
+              }
+            }
+          }, 500)
+        }, 1000)
+      }
+    }
+  })
 }
 
 const toggleTabs: Function = () => {
@@ -214,11 +316,24 @@ const iframereload = () => {
   document.getElementById("frame").contentWindow.location.reload();
 }
 
-
-//there are already endpoints for this /route.tsx
 const Home: NextPage = ({ apps }) => {
   var Router = useRouter();
-
+    
+  const openApplication: Function = (action, e, Router) => {
+    var frame = window.parent.document.getElementsByClassName(styles["main-frame"])[0].querySelector('iframe');
+    if (action=='proxy') {
+      history.push({"uri":e});
+      frame.src = "/route?query="+encodeURIComponent(decodeURIComponent(e));
+    }
+    else if (action=='redirect') frame.src = e;
+    else if (action=='home') {
+      frame.src = "/home";
+    } else if (action=='route') {
+      Router.replace(e)
+    }
+    else frame.src = e;
+  }
+  
   if (global.window) global.window.Router = Router;
   
   const Apps: Function = () => {
@@ -245,7 +360,7 @@ const Home: NextPage = ({ apps }) => {
 	};
   
   return (
-    <div className={styles.main} data-theme={"classic"}>
+    <div className={styles.main} data-theme="classic">
       <Head>
         <title>Illusive</title>
         <meta name="description" content="Illusive | Gateway to Evading Censorship" />
@@ -270,12 +385,12 @@ const Home: NextPage = ({ apps }) => {
 						{
 							history.map(tab=>{
                 return (
-									<div key={tab.title.toLowerCase()} className={styles['historyapp']} onClick={((e)=>{openApplication("proxy", tab.url, Router);toggleTabs();})}>
+									<div key={tab.title} className={styles['historyapp']} onClick={((e)=>{openApplication("proxy", tab.url, Router);toggleTabs();})}>
 										<div className={styles['historyapptext']}>
-                      <p>{tab.uri}</p>
+                      <p>{tab.title}</p>
 										</div>
 
-                    <img src={"http://www.google.com/s2/favicons?domain="+new URL(tab.uri).host}></img>
+                    <img src={"https://www.google.com/s2/favicons?domain="+tab.uri}></img>
 									</div>
 								)
 							})
@@ -338,10 +453,10 @@ const Home: NextPage = ({ apps }) => {
 					
 	        <div className={styles['bottom-right-menu']}>
                 <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']}`} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M5.83331 0C2.61169 0 0 2.61166 0 5.83334V24.1667C0 27.3883 2.61169 30 5.83331 30H20C28.2842 30 35 23.2843 35 15C35 6.71573 28.2843 0 20 0H5.83331ZM20.0607 8.06067C20.6464 7.47488 20.6464 6.52512 20.0607 5.93933C19.4749 5.35355 18.5251 5.35355 17.9393 5.93933L9.93933 13.9393C9.35358 14.5251 9.35358 15.4749 9.93933 16.0607L17.9393 24.0607C18.5251 24.6465 19.4749 24.6465 20.0607 24.0607C20.6464 23.4749 20.6464 22.5251 20.0607 21.9393L13.1213 15L20.0607 8.06067Z" fill="#D9D9D9"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M5.83331 0C2.61169 0 0 2.61166 0 5.83334V24.1667C0 27.3883 2.61169 30 5.83331 30H20C28.2842 30 35 23.2843 35 15C35 6.71573 28.2843 0 20 0H5.83331ZM20.0607 8.06067C20.6464 7.47488 20.6464 6.52512 20.0607 5.93933C19.4749 5.35355 18.5251 5.35355 17.9393 5.93933L9.93933 13.9393C9.35358 14.5251 9.35358 15.4749 9.93933 16.0607L17.9393 24.0607C18.5251 24.6465 19.4749 24.6465 20.0607 24.0607C20.6464 23.4749 20.6464 22.5251 20.0607 21.9393L13.1213 15L20.0607 8.06067Z" fill="#D9D9D9"/>
               </svg>
               <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']}`} viewBox="0 0 35 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M15 0C6.71576 0 0 6.71573 0 15C0 23.2843 6.7157 30 15 30H29.1667C32.3883 30 35 27.3883 35 24.1667V5.83334C35 2.61166 32.3883 0 29.1667 0H15ZM15.9393 21.9393C15.3536 22.5251 15.3536 23.4749 15.9393 24.0607C16.5251 24.6465 17.4749 24.6465 18.0607 24.0607L26.0607 16.0607C26.6464 15.4749 26.6464 14.5251 26.0607 13.9393L18.0607 5.93933C17.4749 5.35355 16.5251 5.35355 15.9393 5.93933C15.3536 6.52512 15.3536 7.47488 15.9393 8.06067L22.8787 15L15.9393 21.9393Z" fill="#D9D9D9"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M15 0C6.71576 0 0 6.71573 0 15C0 23.2843 6.7157 30 15 30H29.1667C32.3883 30 35 27.3883 35 24.1667V5.83334C35 2.61166 32.3883 0 29.1667 0H15ZM15.9393 21.9393C15.3536 22.5251 15.3536 23.4749 15.9393 24.0607C16.5251 24.6465 17.4749 24.6465 18.0607 24.0607L26.0607 16.0607C26.6464 15.4749 26.6464 14.5251 26.0607 13.9393L18.0607 5.93933C17.4749 5.35355 16.5251 5.35355 15.9393 5.93933C15.3536 6.52512 15.3536 7.47488 15.9393 8.06067L22.8787 15L15.9393 21.9393Z" fill="#D9D9D9"/>
               </svg>
 	            <IoReloadOutline id='reload-frame' className={`${styles['main-nav-icon']} ${styles['reload-btn']}`} onClick={iframereload} target="if" />
 	            <svg width="16" height="16" className={`${styles['main-nav-icon']} ${styles['fill']} ${styles['star-btn']}`} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">

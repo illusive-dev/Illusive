@@ -3,7 +3,7 @@ import * as enc from './encoding.ts';
 const Encoding = {...enc.default}
 
 export default {
-  proxy: 'Ultraviolet',
+  proxy: 'Dynamic',
   config: {
     'Ultraviolet': {
       prefix: '/service/uv/',

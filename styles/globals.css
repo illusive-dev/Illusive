@@ -11,6 +11,7 @@ body {
 }
 
 [data-theme="classic"] {
+  --accent: #ebebeb;
   --setbox: #D9D9D9;
 	--bg-color: #181818;
   --appBG: #232323;
@@ -20,6 +21,7 @@ body {
   --ql-dock: #000000;
   --main: #232323;
   --hr: #3C3C3C;
+  --dock: rgb(35, 35, 35);
   --dock-input: #171717;
   --dockInner-s: rgba(55, 55, 55, 0.25);
   --controls-btns: white;
@@ -47,6 +49,7 @@ body {
 }
 
 [data-theme="summer"] {
+  --accent: #6c5a47;
   --setbox: #d5c2a9;
   --bg-color: #DBD0C0;
   --appBG: #F9E4C8;
@@ -56,7 +59,8 @@ body {
   --ql-dock: #ffffff;
   --main: #b0b0b0;
   --hr: #E6DDC6;
-  --dock-input: #fffaf5;
+  --dock: #f9e4c8;
+  --dock-input: #ffe9d3;
   --dockInner-s: rgb(253, 236, 219);
   --controls-btns: #a6937a;
   --controls-btns-hover: #776753;
@@ -66,6 +70,7 @@ body {
 }
 
 [data-theme="light"] {
+  --accent: #000000;
   --setbox: #4a4a4a;
   --bg-color: #e3e3e3;
   --appBG: #f0f0f0;
@@ -75,8 +80,9 @@ body {
   --ql-dock: #ffffff;
   --main: #b0b0b0;
   --hr: #3d3d3d;
+  --dock: rgba(255, 255, 255, 0.25);
   --dock-input: #fff;
-  --dockInner-s: rgba(255, 255, 255, 0.25);
+  --dockInner-s: rgba(255, 255, 255, 1);
   --controls-btns: #000000;
   --controls-btns-hover: #525252;
   --mark: #6e6e6e;
@@ -85,6 +91,7 @@ body {
 }
 
 [data-theme="hacker"] {
+  --accent: #37ff00;
   --setbox: #0a1108;
 	--bg-color: #000000;
   --appBG: #050904;
@@ -94,6 +101,7 @@ body {
   --ql-dock: #000000;
   --main: #232323;
   --hr: #BDBCBC;
+  --dock: rgb(5, 9, 4);
   --dock-input: black;
   --dockInner-s: rgba(55, 55, 55, 0.25);
   --controls-btns: #2dd200;
@@ -104,6 +112,7 @@ body {
 }
 
 [data-theme="ember"] {
+  --accent: #533131;
   --setbox: #533131;
   --bg-color: #4a2e2e;
   --appBG: #684141;
@@ -122,37 +131,77 @@ body {
 }
 
 [data-theme="mint"] {
-    --setbox: #2B8E4D;
-    --bg-color: #b6ffce;
-    --appBG: #42AF67;
-    --font-color: black;
-    --ui: #23763F;
-    --clock-hover: #23e462;
-    --hr: #2B8E4D;
-    --dock: #42AF67;
-    --dock-input: #77d097;
-    --dockInner-s: #3c9d5e;
-    --controls-btns: #46c871;
-    --controls-btns-hover: #37bb62;
-    --mark: #55cc7e;
-    --caret: #6AED96;
-    --settings-bg: #2B8E4D;
-}
-
-[data-theme="oldmint"] {
+  --accent: #2B8E4D;
   --setbox: #2B8E4D;
-  --bg-color: #23763F;
+  --bg-color: #9de7b5 /*#b6ffce*/;
   --appBG: #42AF67;
-  --font-color: #6AED96;
+  --font-color: #286c3e;
   --ui: #23763F;
   --clock-hover: #23e462;
   --hr: #2B8E4D;
-  --dock: #42AF67;
-  --dock-input: #39995b;
-  --dockInner-s: #3c9d5e;
+  --dock: #53e484;
+  --dock-input: #82e4a5;
+  --dockInner-s: #53e484;
   --controls-btns: #46c871;
   --controls-btns-hover: #37bb62;
   --mark: #55cc7e;
   --caret: #6AED96;
   --settings-bg: #2B8E4D;
+}
+
+[data-theme="fracital"] {
+  --accent: #ff77fc;
+  --setbox: #313131;
+  --bg-color: #282828;
+  --appBG: #1d1d1d;
+  --font-color: #ff77fc;
+  --ui: #111;
+  --clock-hover: #bb4db9;
+  --hr: #FF77FC;
+  --dock: #1d1d1d;
+  --dock-input: #111;
+  --dockInner-s: #1a1a1a;
+  --controls-btns: #FF77FC;
+  --controls-btns-hover: #EE37EA;
+  --mark: #F030EC;
+  --caret: #FF77FC;
+  --settings-bg: #313131;
+}
+
+[data-theme="terbium"] {
+  --accent: #47CA64;
+  --setbox: #313131;
+  --bg-color: #282828;
+  --appBG: #1d1d1d;
+  --font-color: #888;
+  --ui: #111;
+  --clock-hover: #47CA64;
+  --hr: #47CA64;
+  --dock: #1d1d1d;
+  --dock-input: #111;
+  --dockInner-s: #1a1a1a;
+  --controls-btns: #47CA64;
+  --controls-btns-hover: #2E8C43;
+  --mark: #47CA64;
+  --caret: #888;
+  --settings-bg: #111;
+}
+
+[data-theme="amber"] {
+--accent: #AF7D42;
+--setbox: #593c1b;
+--bg-color: #AF7D42;
+--appBG: #835929;
+--font-color: #F2B266;
+--ui: #7E5A30;
+--clock-hover: #a5610e;
+--hr: #b38148;
+--dock: #AF7D42;
+--dock-input: #855F33;
+--dockInner-s: #C69156;
+--controls-btns: #835929;
+--controls-btns-hover: #dba66a;
+--mark: #4F3920;
+--caret: #F2B266;
+--settings-bg: #593c1b;
 }
