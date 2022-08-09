@@ -244,7 +244,7 @@ if (typeof window !== "undefined") {
             
             if (toSet.startsWith('/service/')) {
               console.log(toSet);
-              if (toSet.test(/\/service\/osana/)) toSet = new URL(toSet.replace('/service/osana/', ''));
+              if (toSet.test(/\/service\/osana/)) toSet = new URL(decodeURIComponent(toSet.replace('/service/osana/', '')));
               else toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
 
               try {
@@ -277,7 +277,7 @@ if (typeof window !== "undefined") {
               if (!urlbar.isfocus&&frame.loaded) {
                 var toSet = path;
                 if (toSet.startsWith('/service/')) {
-                  if (toSet.test(/\/service\/osana/)) toSet = new URL(toSet.replace('/service/osana/', ''));
+                  if (toSet.test(/\/service\/osana/)) toSet = new URL(decodeURIComponent(toSet.replace('/service/osana/', '')));
                   else toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
       
                   urlbar.setAttribute('val', toSet.href);
