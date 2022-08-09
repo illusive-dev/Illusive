@@ -1,0 +1,2 @@
+(()=>{"use strict";self.__osana$config={bare:'https://radon.games/bare/',prefix:"/service/osana/",codec:self.__osana$bundle.codecs.plain,files:{config:"/osana/osana.config.js",client:"/osana/osana.client.js",bundle:"/osana/osana.bundle.js"},blacklist:[/^(www\.)?netflix\.com/,/^accounts\.google\.com/]},self.__osana$config})();
+//# sourceMappingURL=osana.config.js.map

@@ -157,7 +157,7 @@ const Tabs: NextPage = ({apps}) => {
       document.cookie = "proxy="+proxy;
     };
     const settingsTab = document.getElementById(styles.currentSettingTab);
-    settingsTab.innerHTML = `<div class="${styles.themesOverlaySettings}"><img style="width:200px;height:200px;" data-setting="Ultraviolet" class="${styles.themesSettingOption}" src="/img/proxy/uv.png"></img><img style="width:180px;height:180px;" data-setting="Dynamic" class="${styles.themesSettingOption}" src="/img/proxy/dynamic.png"></img></div>`;
+    settingsTab.innerHTML = `<div class="${styles.themesOverlaySettings}"><img style="width:200px;height:200px;" data-setting="Ultraviolet" class="${styles.themesSettingOption}" src="/img/proxy/uv.png"></img><img style="width:180px;height:180px;" data-setting="Dynamic" class="${styles.themesSettingOption}" src="/img/proxy/dynamic.png"></img><img style="width:200px;height:200px;" data-setting="Osana" class="${styles.themesSettingOption}" src="/img/proxy/osana.png"></img></div>`;
     const options = document.getElementById(styles.currentSettingTab).childNodes[0].childNodes;
     options.forEach(x=>{
       x.onclick = proxies;

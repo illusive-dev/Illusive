@@ -244,11 +244,15 @@ if (typeof window !== "undefined") {
             
             if (toSet.startsWith('/service/')) {
               console.log(toSet);
-              toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
+              if (toSet.test(/\/service\/osana/)) toSet = new URL(toSet.replace('/service/osana/', ''));
+              else toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
 
-              console.log({url:toSet.href, name: frame.contentDocument.title});
+              try {
+                console.log({url:toSet.href, name: frame.contentDocument.title});
 
-              addToHistory({url:toSet.href, name: frame.contentDocument.title})
+                addToHistory({url:toSet.href, name: frame.contentDocument.title});
+              } catch {}
+              
   
               urlbar.setAttribute('val', toSet.href);
               urlbar.innerHTML = `<span class="${styles.marking}">${toSet.protocol}//</span>${toSet.href.replace(toSet.protocol+'//', '')}`;
@@ -273,7 +277,8 @@ if (typeof window !== "undefined") {
               if (!urlbar.isfocus&&frame.loaded) {
                 var toSet = path;
                 if (toSet.startsWith('/service/')) {
-                  toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
+                  if (toSet.test(/\/service\/osana/)) toSet = new URL(toSet.replace('/service/osana/', ''));
+                  else toSet = new URL(decodeURIComponent(atob(toSet.replace('/service/dip/', '').replace('/service/uv/', '').replace('/', ''))));
       
                   urlbar.setAttribute('val', toSet.href);
                   urlbar.innerHTML = `<span class="${styles.marking}">${toSet.protocol}//</span>${toSet.href.replace(toSet.protocol+'//', '')}`;
