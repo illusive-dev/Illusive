@@ -8,15 +8,15 @@ import { loadFull } from "tsparticles";
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 
-const Ultraviolet: NextPage = () => {
+const Dynamic: NextPage = () => {
   return (
     <>
       <Head>
         <title>Register SW</title>
       </Head>
-      <Script src="/register/dip.js"></Script>
+      <Script src="/register/osana.js"></Script>
     </>
   )
 }
 
-export default Ultraviolet;
+export default Dynamic;

@@ -1,8 +1,10 @@
 importScripts('/dip/dip.worker.js');
+importScripts('/osana/osana.worker.js');
 importScripts('/uv/uv.sw.js');
 importScripts('/encoding.js');
 
 var DIP = new DIPServiceWorker('/dip/dip.config.js');
+var OSANA = new OsanaServiceWorker();
 var UV = new UVServiceWorker();
 
 self.addEventListener('install', event => {
@@ -22,6 +24,8 @@ async function fetchHandler(event) {
     console.log('[SW]', 'Malware Test')
     
     if (event.request.url.startsWith(location.origin+'/service/dip/')) var req = await fetch('/api/malware?url='+dbase64.decode(request.url.split('?')[0].replace(location.origin+'/service/dip/', '')));
+    
+    if (event.request.url.startsWith(location.origin+'/service/osana/')) var req = await fetch('/api/malware?url='+request.url.split('?')[0].replace(location.origin+'/service/osana/', ''));
 
     if (event.request.url.startsWith(location.origin+'/service/uv/')) var req = await fetch('/api/malware?url='+dbase64.decode(request.url.split('?')[0].replace(location.origin+'/service/uv/', '')));
 
@@ -39,6 +43,7 @@ async function fetchHandler(event) {
   request = new Request(event.request.url.split('?')[0], {...request});
 
   if (event.request.url.startsWith(location.origin+'/service/dip')) return await DIP.fetch({request});
+  if (event.request.url.startsWith(location.origin+'/service/osana')) return await OSANA.fetch({request});
   if (event.request.url.startsWith(location.origin+'/service/uv')) return await UV.fetch({request});
 
   return fetch(event.request);
@@ -48,4 +53,4 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetchHandler(event)
   )
-})
+});
